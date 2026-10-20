@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 172" role="img" aria-labelledby="title desc">
+  <title id="title">LAN Ehitus</title>
+  <desc id="desc">LAN wordmark in front of a black and gold building outline, with LAN Ehitus below.</desc>
+  <g fill="none" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M151 72V40l34-18v50" stroke="#b69a38" stroke-width="5"/>
+    <path d="M185 22v47" stroke="#c7a92f" stroke-width="5"/>
+    <path d="M187 15V8l55 24v40" stroke="#191e24" stroke-width="4"/>
+  </g>
+  <path d="M186 23l15 7v40h-15z" fill="#d7b622" opacity=".9"/>
+  <g fill="#191e24" transform="translate(56 61) scale(.95 .76)">
+    <path d="M0 0h16v49h48v15H0z"/>
+    <path d="M70 64 107 0h24l37 64h-19l-30-51-30 51z"/>
+    <path d="M178 64V0h16l50 42V0h16v64h-16l-50-42v42z"/>
+  </g>
+  <path d="M177 108h9v-9h-9zm14 0h9v-9h-9z" fill="#191e24"/>
+  <path d="M57 120h247" stroke="#a9aaa5" stroke-width="1.2"/>
+  <text x="56" y="158" fill="#191e24" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="700" letter-spacing="3.5">LAN</text>
+  <text x="157" y="158" fill="#ad9239" font-family="Arial,Helvetica,sans-serif" font-size="29" font-weight="400" letter-spacing="1.2">Ehitus</text>
+</svg>

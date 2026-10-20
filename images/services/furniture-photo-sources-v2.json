@@ -1,0 +1,40 @@
+{
+  "selected_on": "2026-10-18",
+  "source_type": "Stock interior photographs by Max Vakhtbovych",
+  "usage": "Illustrative furniture types, not LAN projects or team photography.",
+  "main": "furniture-premium-real-wardrobe-suite-v2.jpg",
+  "selection": "Two wardrobe systems, two distinct premium sideboards, and a fitted wall-storage composition. No people, faces, or hands.",
+  "license": "https://www.pexels.com/legal-pages/license",
+  "photos": [
+    {
+      "file": "furniture-premium-real-wardrobe-suite-v2.jpg",
+      "alt": "Большая гардеробная с зеркальными фасадами и центральным комодом",
+      "author": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/interior-of-spacious-walk-in-closet-with-mirrored-furniture-and-bright-lamps-6587821/"
+    },
+    {
+      "file": "furniture-premium-real-wardrobe-interior-v2.jpg",
+      "alt": "Встроенный шкаф с деревянными полками, ящиками и зеркальной дверью",
+      "author": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/minimalist-styled-empty-built-in-closet-with-racks-and-shelves-7005285/"
+    },
+    {
+      "file": "furniture-premium-real-brass-cabinet-v2.jpg",
+      "alt": "Комод с рифлёными деревянными фасадами и латунным основанием",
+      "author": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/wooden-luxury-cabinet-in-home-interior-8135256/"
+    },
+    {
+      "file": "furniture-premium-real-walnut-sideboard-v2.jpg",
+      "alt": "Длинный ореховый комод с выдвижными ящиками и дверцами",
+      "author": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/apartment-interior-with-cabinet-with-vases-near-mirror-6480207/"
+    },
+    {
+      "file": "furniture-premium-real-wall-storage-v2.jpg",
+      "alt": "Корпусная мебель для гостиной с подвесными шкафами и рабочим столом",
+      "author": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/spacious-living-room-with-cupboards-6489097/"
+    }
+  ]
+}

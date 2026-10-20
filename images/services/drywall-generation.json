@@ -1,0 +1,78 @@
+{
+  "mode": "built-in image_gen",
+  "format": "16:9 landscape",
+  "purpose": "Photorealistic illustrative drywall construction images without people; not records of completed LAN OÜ projects.",
+  "assets": [
+    {
+      "file": "drywall-wide-framing-ai.jpg",
+      "alt": "Каркас перегородки и утепление — визуализация",
+      "position": "50% 50%",
+      "result": "drywall_wide_extra_0",
+      "prompt": "Use case: photorealistic-natural. Asset type: horizontal widescreen 16:9 documentary photograph of actual-looking drywall work in an ordinary apartment renovation in Estonia. No people or human body parts. Realistic natural window light, modest unfinished site, a little plaster dust, real material texture and slight ordinary imperfections. European galvanized steel framing and gray gypsum board, correct believable fixings, no decorative staging. Not a render, not glossy marketing photography; avoid cinematic lighting, HDR, smooth plastic surfaces, impossible framing. No text, watermarks or logos. Compose a long wide view with construction work filling the image; all important construction detail visible within a horizontal widescreen crop. Scene: at eye level looking diagonally along a new internal partition wall, with an exposed section of straight galvanized studs, fitted mineral wool insulation and a framed doorway near the middle, and a section already sheathed in pale gray gypsum board at the right. Plain existing plaster walls and a side window provide the apartment context. Raw dusty floor visible only along the bottom, two thin offcuts lying flat near a board stack. Honest medium-wide construction progress photograph showing the entire wall's framing, insulation and board transition. Natural flat overcast daylight.",
+      "source": "exec-817d85f2-b6f4-4057-9d44-259245a54e70.png"
+    },
+    {
+      "index": 0,
+      "file": "drywall-attic-ai.jpg",
+      "alt": "Обшивка мансарды гипсокартоном — визуализация",
+      "position": "50% 50%",
+      "focus": [
+        "85% 20%",
+        1.12,
+        1.3
+      ],
+      "source": "exec-77a30c0f-fa07-4db8-a2b7-7813fffe5e9c.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: horizontal widescreen 16:9 documentary construction photograph for a drywall-service website. Create ONE photorealistic image of a believable modest renovation site, no people or body parts. Ordinary available daylight, real dust and material imperfections, technically credible plasterboard and galvanized steel profile construction. No CGI or architectural-render appearance, glamorous lighting, fake HDR, styled decor, logos, text or watermark. The construction detail must dominate the center of the frame and be recognizable at thumbnail size; avoid large empty floor areas. This must visibly be a different property from an ordinary white apartment with a radiator and square window. Distinct property: the attic floor of a detached timber house. A sloping roof and one small roof skylight clearly identify this attic location. Eye-level oblique view close to the sloping wall and ceiling where pale-gray gypsum board has been fitted to one side and an adjacent section remains open, revealing galvanized support profiles and roof insulation with a credible taped vapor-control layer behind the profiles. A rough old timber purlin is visible near the upper edge; the room proportions and construction layers must be realistic. A few short gypsum offcuts at the bottom edge, soft skylight daylight, the sloped sheathing transition occupies the middle of the wide frame. No conventional upright apartment window or radiator."
+    },
+    {
+      "file": "drywall-wide-boarded-wall-ai.jpg",
+      "alt": "Обшивка стены гипсокартоном — визуализация",
+      "position": "50% 50%",
+      "result": "drywall_replacement_0",
+      "prompt": "Use case: photorealistic-natural. Asset type: wide landscape 16:9 drywall construction-site photograph for a building contractor's website. This must look like a casual photograph of an ordinary real job, with natural imperfections and ordinary available daylight, not an architectural render or staged promotional shoot. No people, no human body parts, no faces. Accurate European plasterboard construction, dusty materials, believable board scale, realistic edge joints, fasteners and workmanship. Muted authentic colors and real camera perspective, no HDR or cinematic grading, no text, logos or watermarks. Compose for a wide horizontal crop: keep the construction task and all important details within the middle 65% of the image height, rather than making a near-square view. Scene: interior of a modest apartment being renovated, photographed horizontally at eye level from the doorway. The main subject is a long wall being clad in pale gray gypsum plasterboard: most sheets installed with neat vertical black screw lines, one narrow open bay at the right shows galvanized studs and mineral wool, believable vertical sheet joints. A compact cordless driver rests naturally on a low stack of board offcuts, a thin layer of gypsum dust covers the protected floor. Soft light from a plain side window, an unfinished adjacent wall. The wide view clearly shows the wall and material installation, with just a small floor margin. No workers.",
+      "source": "exec-5b8fe93b-89dd-4b0b-8b2a-00b7596161f6.png"
+    },
+    {
+      "index": 1,
+      "file": "drywall-brick-apartment-ai.jpg",
+      "alt": "Перегородка в кирпичной квартире — визуализация",
+      "position": "50% 50%",
+      "focus": [
+        "75% 45%",
+        1.16,
+        1.35
+      ],
+      "source": "exec-ff017a38-b9bc-4daf-a798-434370ebe947.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: horizontal widescreen 16:9 documentary construction photograph for a drywall-service website. Create ONE photorealistic image of a believable modest renovation site, no people or body parts. Ordinary available daylight, real dust and material imperfections, technically credible plasterboard and galvanized steel profile construction. No CGI or architectural-render appearance, glamorous lighting, fake HDR, styled decor, logos, text or watermark. The construction detail must dominate the center of the frame and be recognizable at thumbnail size; avoid large empty floor areas. This must visibly be a different property from an ordinary white apartment with a radiator and square window. Distinct property: renovation of a small older red-brick apartment. Medium-wide horizontal photograph of an internal drywall partition with a doorway: half the near wall is clad with gray gypsum sheets with realistic fastener lines, the open half reveals vertical galvanized studs and insulation. An exposed reddish brick wall and a tall narrow dark-painted window at the back clearly distinguish this location. Worn rough plank floor with a small patch of protective sheeting and a little plaster dust, old masonry doorway at one frame edge. Natural overcast window daylight, ordinary real jobsite, framing and drywall doorway are the main centered subjects. No radiator, no modern white room."
+    },
+    {
+      "file": "drywall-wide-ceiling-ai.jpg",
+      "alt": "Гипсокартонный потолок в работе — визуализация",
+      "position": "50% 50%",
+      "result": "drywall_wide_extra_1",
+      "prompt": "Use case: photorealistic-natural. Asset type: horizontal widescreen 16:9 documentary photograph of actual-looking drywall work in an ordinary apartment renovation in Estonia. No people or human body parts. Realistic natural window light, modest unfinished site, a little plaster dust, real material texture and slight ordinary imperfections. European galvanized steel framing and gray gypsum board, correct believable fixings, no decorative staging. Not a render, not glossy marketing photography; avoid cinematic lighting, HDR, smooth plastic surfaces, impossible framing. No text, watermarks or logos. Compose a long wide view with construction work filling the image; all important construction detail visible within a horizontal widescreen crop. Scene: a horizontal wide-angle photograph looking gently upward across a modest room with a suspended gypsum plasterboard ceiling half installed. The open ceiling area at the right reveals believable cross-connected galvanized metal ceiling profiles hung from the concrete slab, with thin hangers spaced regularly. Installed gray ceiling boards at left have straight sheet seams and believable screw rows; an unfinished board edge clearly shows the installation stage. Small upper portions of unfinished walls and a plain side window below, the top of a stable stepladder at the bottom edge. Ceiling occupies most of the landscape image. Natural soft daylight, authentic construction detail and subtle dust.",
+      "source": "exec-34feafe3-25a5-435c-bad6-04bc5c7a1000.png"
+    },
+    {
+      "index": 2,
+      "file": "drywall-commercial-ai.jpg",
+      "alt": "Гипсокартонные перегородки в коммерческом помещении — визуализация",
+      "position": "50% 50%",
+      "focus": [
+        "5% 45%",
+        1.12,
+        1.35
+      ],
+      "source": "exec-a132ecfe-1f32-49fd-9166-c5ced99b39e6.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: horizontal widescreen 16:9 documentary construction photograph for a drywall-service website. Create ONE photorealistic image of a believable modest renovation site, no people or body parts. Ordinary available daylight, real dust and material imperfections, technically credible plasterboard and galvanized steel profile construction. No CGI or architectural-render appearance, glamorous lighting, fake HDR, styled decor, logos, text or watermark. The construction detail must dominate the center of the frame and be recognizable at thumbnail size; avoid large empty floor areas. This must visibly be a different property from an ordinary white apartment with a radiator and square window. Distinct property: a small ground-floor commercial unit during fit-out, with a visible wide storefront glazing bay at the far end and a low flat ceiling. Eye-level medium-wide documentary shot along two newly built drywall office partitions forming a small corridor. One partition is partially clad with gray gypsum boards with screw rows and unfinished joints; a short exposed metal-stud section by a doorway shows the actual assembly. Raw dark concrete floor with faint old floor adhesive, a neatly stacked small bundle of metal profiles at the lower edge, one short step platform, neutral daylight from storefront. Emphasize the wall work and junctions, making this clearly a different commercial interior from a domestic apartment. No people, signage or furniture staging."
+    },
+    {
+      "file": "drywall-wide-joints-ai.jpg",
+      "alt": "Подготовка швов гипсокартона — визуализация",
+      "position": "50% 50%",
+      "result": "drywall_replacement_1",
+      "prompt": "Use case: photorealistic-natural. Asset type: wide landscape 16:9 drywall construction-site photograph for a building contractor's website. This must look like a casual photograph of an ordinary real job, with natural imperfections and ordinary available daylight, not an architectural render or staged promotional shoot. No people, no human body parts, no faces. Accurate European plasterboard construction, dusty materials, believable board scale, realistic edge joints, fasteners and workmanship. Muted authentic colors and real camera perspective, no HDR or cinematic grading, no text, logos or watermarks. Compose for a wide horizontal crop: keep the construction task and all important details within the middle 65% of the image height, rather than making a near-square view. Scene: a small room during the joint-finishing stage of gypsum-board renovation, naturally photographed from an oblique doorway angle in horizontal widescreen format. Wide gray plasterboard wall and part of the adjoining wall, uneven yet credible fresh white joint-compound bands over taped seams and separate filled screw spots, subtle traces of a wide taping knife visible in the drying compound. At the bottom edge a used stainless steel taping knife and mud pan sit on a plain dust-covered work stool, one unlabelled compound bucket nearby. No people. Modest residential proportions, ordinary soft window daylight, no styled decoration, authentic renovation mess limited to the edge. Emphasize the wall surface and finishing process.",
+      "source": "exec-df213bb5-2bec-4627-8774-3c29bad353be.png"
+    }
+  ]
+}

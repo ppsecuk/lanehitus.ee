@@ -1,0 +1,47 @@
+{
+  "selected_on": "2026-10-18",
+  "usage": "Illustrative service imagery, not photographs of LAN projects or staff.",
+  "main": "furniture-assembly-carcass-v4.jpg",
+  "selection": "Main preview shows a wardrobe carcass lying on its back mid-assembly with detached doors, shelves and instructions. Bed and desk retain visible assembly components, with all tool displays removed. Five images total; no people or hands.",
+  "photos": [
+    {
+      "file": "furniture-assembly-carcass-v4.jpg",
+      "alt": "Сборка шкафа: корпус на защитном покрытии, отдельные дверцы и полки",
+      "source_type": "AI-generated illustration",
+      "generator": "Built-in image_gen",
+      "prompt_key": "main"
+    },
+    {
+      "file": "furniture-premium-real-wardrobe-interior-v2.jpg",
+      "alt": "Встроенный шкаф с деревянными полками, ящиками и зеркальной дверью",
+      "author": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/minimalist-styled-empty-built-in-closet-with-racks-and-shelves-7005285/"
+    },
+    {
+      "file": "furniture-assembly-bed-v4.jpg",
+      "alt": "Сборка дубовой кровати и установка ламелей",
+      "source_type": "AI-generated illustration",
+      "generator": "Built-in image_gen",
+      "prompt_key": "bed"
+    },
+    {
+      "file": "furniture-assembly-desk-v4.jpg",
+      "alt": "Сборка письменного стола и установка креплений",
+      "source_type": "AI-generated illustration",
+      "generator": "Built-in image_gen",
+      "prompt_key": "desk"
+    },
+    {
+      "file": "furniture-premium-real-wall-storage-v2.jpg",
+      "alt": "Корпусная мебель для гостиной с подвесными шкафами и рабочим столом",
+      "author": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/spacious-living-room-with-cupboards-6489097/"
+    }
+  ],
+  "generation_prompts": {
+    "main": "Use case: photorealistic-natural. Create a horizontal 3:2 realistic documentary photograph for a premium furniture ASSEMBLY SERVICE. The scene must instantly read as furniture assembly in progress even as a small thumbnail. In a real bright European apartment bedroom, a large two-bay oak-veneered WARDROBE CARCASS lies ON ITS BACK on two thick grey protective felt blankets on the floor, clearly not yet upright: side panels, top, bottom and central divider have been joined squarely and the open front faces upward. It has no drawers. A couple of loose oak shelf panels are stacked beside it, two full-height matte ivory wardrobe doors lean safely together against the adjacent wall, and one small paper instruction sheet with simple line diagrams sits beside the panels. The unfinished joined carcass and separate doors should dominate the frame. Camera from a naturally elevated standing viewpoint looking down at a three-quarter angle, all sides correctly proportioned (wardrobe actual dimensions 220cm tall,160cm wide,58cm deep), realistic predrilled shelf holes and ordinary metal cam-lock joints at corners. A few remaining dowels and cam screws in ONE small paper packet beside instruction sheet. NO drills, NO toolboxes, NO tools displayed on the floor, NO people, NO hands, NO faces. Premium oak material, authentic restrained apartment, daylight, slightly uneven real room lighting, subtle real wood grain and paper texture, honest professional installation photograph. Avoid glossy render style, no showroom staging, no superfluous props, no logos or readable words, no collage. Image must show the recognizable full wardrobe carcass and its detached doors, everything physically resting on floor or wall.",
+    "bed": "Use case: precise-object-edit. Keep the bed, room, partial slats and remaining slats exactly unchanged. Remove the entire tool display in the bottom left: drill, Allen key, two bolts AND the small dark rectangular felt tool mat. Fill that region with continuous matching existing natural woven rug. NO tools, no hardware on floor. Keep wood bedframe construction and the stacked remaining bed slats clearly visible so this still shows bed assembly in progress. Preserve photographic textures, camera, lighting, proportions. No people, hands, faces or extra objects.",
+    "desk": "Use case: precise-object-edit. Keep the desk, room, small stool supporting cable tray, main large grey protective work blanket and every furniture component unchanged. Remove ONLY the tools and parts arranged on the blanket in foreground: the drill, its detached battery, the bit holder and bits, the loose bolts, and the little cardboard carton with hardware. Reveal continuous matching grey blanket in their place. No tools or hardware visible on floor. Keep cable tray assembly visible beneath the desk. Preserve exact furniture construction, camera and photograph-like lighting. No people, faces, hands, words or extra objects."
+  },
+  "stock_license": "https://www.pexels.com/legal-pages/license"
+}

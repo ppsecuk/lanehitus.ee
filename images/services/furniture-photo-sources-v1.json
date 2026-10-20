@@ -1,0 +1,40 @@
+{
+  "selected_on": "2026-10-18",
+  "source_type": "Stock photographs, not AI-generated images",
+  "usage": "Illustrative furniture types, not LAN projects or team photography.",
+  "main": "furniture-real-wardrobe-v1.jpg",
+  "selection": "Two actual wardrobe photographs first; all five images have no people, faces, or hands.",
+  "license": "https://www.pexels.com/legal-pages/license",
+  "photos": [
+    {
+      "file": "furniture-real-wardrobe-v1.jpg",
+      "alt": "Готовый шкаф с деревянными фасадами",
+      "author": "McFollis",
+      "source": "https://www.pexels.com/photo/contemporary-minimalist-wooden-wardrobe-in-bedroom-38697208/"
+    },
+    {
+      "file": "furniture-real-wardrobe-case-v1.jpg",
+      "alt": "Открытый корпус шкафа с полками и штангой",
+      "author": "Lisa Anna",
+      "source": "https://www.pexels.com/photo/wooden-wardrobe-in-room-19878542/"
+    },
+    {
+      "file": "furniture-real-drawers-v1.jpg",
+      "alt": "Комод с выдвижными ящиками",
+      "author": "Keegan Checks",
+      "source": "https://www.pexels.com/photo/brown-wooden-chest-drawer-beside-white-wall-12715466/"
+    },
+    {
+      "file": "furniture-real-cabinet-v1.jpg",
+      "alt": "Деревянная тумба с дверцами и корзинами",
+      "author": "Ksenia Chernaya",
+      "source": "https://www.pexels.com/photo/photo-of-a-wooden-cabinet-11112749/"
+    },
+    {
+      "file": "furniture-real-desk-v1.jpg",
+      "alt": "Письменный стол в домашнем кабинете",
+      "author": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/interior-of-modern-workplace-in-apartment-6058443/"
+    }
+  ]
+}

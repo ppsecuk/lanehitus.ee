@@ -1,0 +1,15 @@
+{
+  "prompt": "Use case: photorealistic-natural / high-fidelity regeneration. Produce a completely fresh, maximum-quality PHOTOGRAPHIC RETAKE of image 1, keeping the SAME approved scene, composition, furniture design and object positions. Do not reuse its smeared or painterly surface texture. Image 1 is the composition/content reference; image 2 is an accurate product-shape reference for the Makita drill only. Natively render at the highest available resolution, target 3840x2560 pixels, landscape 3:2. The scene: refined European bedroom, substantial wall-wide oak-interior wardrobe, two matte ivory doors installed on left, two open wardrobe carcasses on right with empty shelves/rails; extra wood panels leaning at right wall. One detached long ivory door lies flat on the LARGE grey protective blanket in foreground with three physically correct concealed hinges on ONE long edge. A realistic black/red manual screwdriver, steel L hex key, silver small spirit level and tiny screw packet lie on that large blanket in front of the door. At the right, a true-to-reference teal/black Makita DDF484 drill-driver stands UPRIGHT on its black 18V battery directly on the BARE WOODEN FLOOR, clearly separated from the white door; NO mini mat or rug under Makita and no tool touching painted furniture. Makita correctly human-scaled, about 26cm tall, chuck/short bit points left. Preserve original overall framing and every item's location. Quality: authentic high-resolution full-frame architectural photograph, crisp focused details across room, f/8, ISO100, natural diffused daylight, accurate physical geometry, real fine oak grain and veneer pores, realistic hinges/screws with sharp metal edges, detailed woven felt, true tool silhouette and subtle genuine materials, clean neutral color, believable contact shadows. Recover sharp fine details especially in tools, tool branding, hand tools and door hinges in the bottom third because the website zooms into these. Avoid painterly smearing, plastic CGI surfaces, soft airbrushed wood, blurry lettering, artificial brush textures, sharpening halos and invented tool parts. No people, hands, faces, extra tools, number badges, labels or additional text. Output ONE high-resolution photograph-style image.",
+  "generator": "Built-in image_gen",
+  "file": "images/services/furniture-approved-wardrobe-main-v6.png",
+  "source_type": "Fresh AI-generated photograph-style image using approved scene as composition reference",
+  "usage": "Service illustration, not a photograph of a LAN project.",
+  "native_dimensions": [
+    1536,
+    1024
+  ],
+  "format": "Original lossless PNG copied unchanged from generator output",
+  "replaces": "images/services/furniture-approved-wardrobe-main-v5.jpg",
+  "source_path": "exec-cd6ed1e8-ac2f-47f0-8f85-ec8ce4f8724a.png",
+  "composition": "Same approved wardrobe, Makita standing on bare wooden floor, existing hand tools on large protective blanket; no numbers or small mat under the Makita."
+}

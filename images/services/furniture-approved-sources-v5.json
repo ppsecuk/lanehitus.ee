@@ -1,0 +1,80 @@
+{
+  "approved_on": "2026-10-18",
+  "source_type": "AI-generated photograph-style illustrations",
+  "generator": "Built-in image_gen",
+  "usage": "Service illustrations, not photographs of LAN projects or personnel.",
+  "main": "furniture-approved-wardrobe-main-v5.jpg",
+  "selection": "Five user-approved images in order: wardrobe with standing Makita on bare floor and retained hand tools, oak wardrobe, kitchen assembly, chair components, modular sofa. Preview number badges removed.",
+  "photos": [
+    {
+      "number": 1,
+      "key": "wardrobe-main",
+      "source_path": "exec-5344fb9d-375b-4a43-9dac-dfab415d06c9.png",
+      "prompt": "Use case: precise-object-edit. This is APPROVED website photograph-style asset 1. Remove ONLY the small white preview-number badge containing \"1\" in the top-left corner. Reconstruct the underlying room/wall/rug texture naturally in that tiny corner. Preserve the entire remaining image exactly: same frame and dimensions, same furniture, every tool and fixing, lighting, contact shadows, materials, object positions and room. Especially preserve the standing Makita on the bare wooden floor in image 1 and all three hand tools on its large protective blanket; do not add a mini mat. Do not crop, zoom, restyle, recompose, blur, beautify or change any existing furniture or tool. No replacement badge, no numbers, no labels, no added text. Keep existing product markings such as Makita if present. Only remove the small top-left number label.",
+      "path": "exec-1c1f4672-41bd-4c30-afba-b29666b76bb0.png",
+      "file": "furniture-approved-wardrobe-main-v5.jpg",
+      "alt": "Сборка шкафа: установка дверей и фурнитуры",
+      "preview": {
+        "object_position": "85% 100%",
+        "zoom": 1.5,
+        "mobile_zoom": 1.45
+      }
+    },
+    {
+      "number": 2,
+      "key": "oak-wardrobe",
+      "source_path": "exec-feca4739-632d-4189-9b55-aeb2b82103d9.png",
+      "prompt": "Use case: precise-object-edit. This is APPROVED website photograph-style asset 2. Remove ONLY the small white preview-number badge containing \"2\" in the top-left corner. Reconstruct the underlying room/wall/rug texture naturally in that tiny corner. Preserve the entire remaining image exactly: same frame and dimensions, same furniture, every tool and fixing, lighting, contact shadows, materials, object positions and room. Especially preserve the standing Makita on the bare wooden floor in image 1 and all three hand tools on its large protective blanket; do not add a mini mat. Do not crop, zoom, restyle, recompose, blur, beautify or change any existing furniture or tool. No replacement badge, no numbers, no labels, no added text. Keep existing product markings such as Makita if present. Only remove the small top-left number label.",
+      "path": "exec-fe0b961a-aa75-4908-bf96-37b829568242.png",
+      "file": "furniture-approved-oak-wardrobe-v5.jpg",
+      "alt": "Сборка дубового шкафа с полками и дверцами",
+      "preview": {
+        "object_position": "90% 100%",
+        "zoom": 1.25,
+        "mobile_zoom": 1.2
+      }
+    },
+    {
+      "number": 3,
+      "key": "kitchen",
+      "source_path": "exec-d04e1939-8d02-4723-87e0-191cd1e9479d.png",
+      "prompt": "Use case: precise-object-edit. This is APPROVED website photograph-style asset 3. Remove ONLY the small white preview-number badge containing \"3\" in the top-left corner. Reconstruct the underlying room/wall/rug texture naturally in that tiny corner. Preserve the entire remaining image exactly: same frame and dimensions, same furniture, every tool and fixing, lighting, contact shadows, materials, object positions and room. Especially preserve the standing Makita on the bare wooden floor in image 1 and all three hand tools on its large protective blanket; do not add a mini mat. Do not crop, zoom, restyle, recompose, blur, beautify or change any existing furniture or tool. No replacement badge, no numbers, no labels, no added text. Keep existing product markings such as Makita if present. Only remove the small top-left number label.",
+      "path": "exec-7b416d00-345c-4611-bcd6-511880786a64.png",
+      "file": "furniture-approved-kitchen-v5.jpg",
+      "alt": "Сборка кухонных шкафов и установка мебельных петель",
+      "preview": {
+        "object_position": "65% 100%",
+        "zoom": 1.25,
+        "mobile_zoom": 1.2
+      }
+    },
+    {
+      "number": 4,
+      "key": "chair",
+      "source_path": "exec-1545acce-cb0e-4285-8282-d3d4fe69ba4b.png",
+      "prompt": "Use case: precise-object-edit. This is APPROVED website photograph-style asset 4. Remove ONLY the small white preview-number badge containing \"4\" in the top-left corner. Reconstruct the underlying room/wall/rug texture naturally in that tiny corner. Preserve the entire remaining image exactly: same frame and dimensions, same furniture, every tool and fixing, lighting, contact shadows, materials, object positions and room. Especially preserve the standing Makita on the bare wooden floor in image 1 and all three hand tools on its large protective blanket; do not add a mini mat. Do not crop, zoom, restyle, recompose, blur, beautify or change any existing furniture or tool. No replacement badge, no numbers, no labels, no added text. Keep existing product markings such as Makita if present. Only remove the small top-left number label.",
+      "path": "exec-760dab89-ebd6-4278-8318-48314c7f6a89.png",
+      "file": "furniture-approved-chair-v5.jpg",
+      "alt": "Сборка офисного кресла: детали, крепления и механизм",
+      "preview": {
+        "object_position": "55% 85%",
+        "zoom": 1.12,
+        "mobile_zoom": 1.08
+      }
+    },
+    {
+      "number": 5,
+      "key": "sofa",
+      "source_path": "exec-bd96c451-9ae5-4ebb-a86f-b5a254f0604e.png",
+      "prompt": "Use case: precise-object-edit. This is APPROVED website photograph-style asset 5. Remove ONLY the small white preview-number badge containing \"5\" in the top-left corner. Reconstruct the underlying room/wall/rug texture naturally in that tiny corner. Preserve the entire remaining image exactly: same frame and dimensions, same furniture, every tool and fixing, lighting, contact shadows, materials, object positions and room. Especially preserve the standing Makita on the bare wooden floor in image 1 and all three hand tools on its large protective blanket; do not add a mini mat. Do not crop, zoom, restyle, recompose, blur, beautify or change any existing furniture or tool. No replacement badge, no numbers, no labels, no added text. Keep existing product markings such as Makita if present. Only remove the small top-left number label.",
+      "path": "exec-76a14517-7bb4-4f33-915c-8645f303f6b7.png",
+      "file": "furniture-approved-sofa-v5.jpg",
+      "alt": "Сборка модульного дивана: соединение секций и крепление ножек",
+      "preview": {
+        "object_position": "50% 90%",
+        "zoom": 1.18,
+        "mobile_zoom": 1.12
+      }
+    }
+  ]
+}

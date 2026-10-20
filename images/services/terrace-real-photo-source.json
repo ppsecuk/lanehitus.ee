@@ -1,0 +1,31 @@
+{
+  "checked_on": "2026-10-15",
+  "usage": "Licensed service examples, not claimed as LAN completed projects. User-supplied construction photo remains first.",
+  "photos": [
+    {
+      "file": "terrace-nordic-timber-house.svg",
+      "author": "Jon Flobrant",
+      "location": "Dunö, Kalmar, Sweden",
+      "source": "https://unsplash.com/photos/a-wooden-house-with-a-deck-and-a-patio-cEclpZuiWiM",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "framing": "SVG viewport of original photograph: x=0, y=1150, width=1800, height=1000; full photo width retained; sky and upper roof excluded. No generated content."
+    },
+    {
+      "file": "terrace-nordic-veranda.jpg",
+      "author": "Øyvind Holmstad",
+      "source": "https://commons.wikimedia.org/wiki/File:Kebony_terrassebord_8.JPG",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "changes": "None; original file copied unchanged. Attribution and license displayed below gallery."
+    },
+    {
+      "file": "terrace-nordic-garden.jpg",
+      "author": "Margo Evardson",
+      "source": "https://www.pexels.com/photo/scandinavian-red-cottage-by-seaside-in-summer-37590438/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "changes": "Downloaded 1800px rendition; no crop or generated content."
+    }
+  ]
+}

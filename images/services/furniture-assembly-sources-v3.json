@@ -1,0 +1,48 @@
+{
+  "selected_on": "2026-10-18",
+  "usage": "Illustrative service imagery, not photographs of LAN projects or staff.",
+  "main": "furniture-assembly-wardrobe-v3.jpg",
+  "selection": "Three explicit assembly illustrations (wardrobe, bed frame, desk), one wardrobe interior photograph, and one wall-storage photograph. Replaces both standalone dressers/sideboards and the wardrobe suite with a central chest. No people or hands.",
+  "photos": [
+    {
+      "file": "furniture-assembly-wardrobe-v3.jpg",
+      "alt": "Сборка встроенного шкафа: корпус, полки и установка дверей",
+      "source_type": "AI-generated illustration",
+      "generator": "Built-in image_gen",
+      "prompt_key": "wardrobe"
+    },
+    {
+      "file": "furniture-premium-real-wardrobe-interior-v2.jpg",
+      "alt": "Встроенный шкаф с деревянными полками, ящиками и зеркальной дверью",
+      "author": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/minimalist-styled-empty-built-in-closet-with-racks-and-shelves-7005285/"
+    },
+    {
+      "file": "furniture-assembly-bed-v3.jpg",
+      "alt": "Сборка дубовой кровати и установка ламелей",
+      "source_type": "AI-generated illustration",
+      "generator": "Built-in image_gen",
+      "prompt_key": "bed"
+    },
+    {
+      "file": "furniture-assembly-desk-v3.jpg",
+      "alt": "Сборка письменного стола и установка креплений",
+      "source_type": "AI-generated illustration",
+      "generator": "Built-in image_gen",
+      "prompt_key": "desk"
+    },
+    {
+      "file": "furniture-premium-real-wall-storage-v2.jpg",
+      "alt": "Корпусная мебель для гостиной с подвесными шкафами и рабочим столом",
+      "author": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/spacious-living-room-with-cupboards-6489097/"
+    }
+  ],
+  "generation_prompts": {
+    "wardrobe": "Use case: photorealistic-natural. Asset type: horizontal 3:2 photograph-style illustration for a premium furniture ASSEMBLY SERVICE website. Documentary interior photography, authentic material imperfections, straight verticals, ordinary natural window light, high photographic realism; not a glossy CGI showroom. No people, no hands, no faces, no dressers, no sideboards, no chests of drawers, no text, no logos, no collage. Furniture assembly must be immediately obvious. All geometry, joints, tools and fasteners must be physically plausible. Scene: a high-quality European apartment with oak floor protected by felt. Main subject: a substantial floor-to-ceiling three-bay walnut veneered wardrobe CARCASS during installation, empty shelves and hanging rails visible. Two hinged full-height solid taupe doors already correctly mounted, a third matching full-height door lying flat on padded trestles in the foreground with concealed cup hinges fitted into its back. A small professional cordless driver and organized hardware tray sit on the floor close to the wardrobe. Focus on the large fitted wardrobe structure and precise assembly. No central island, no drawer chest. Wide three-quarter viewpoint, 35mm lens, restrained expensive materials.",
+    "bed": "Use case: photorealistic-natural. Asset type: horizontal 3:2 photograph-style illustration for a premium furniture ASSEMBLY SERVICE website. Documentary interior photography, authentic material imperfections, straight verticals, ordinary natural window light, high photographic realism; not a glossy CGI showroom. No people, no hands, no faces, no dressers, no sideboards, no chests of drawers, no text, no logos, no collage. Furniture assembly must be immediately obvious. All geometry, joints, tools and fasteners must be physically plausible. Scene: bright contemporary bedroom, camera waist-high angled view. Main subject: a substantial premium oak DOUBLE BED FRAME being assembled, all four frame rails correctly joined and standing on six realistic support feet. The longitudinal center support beam rests on two center feet, half of the actual wood slats are installed across both sides, and the rest are stacked together next to it ready to install. Upright linen-upholstered headboard attached squarely at the head. No mattress so the assembly is clearly visible. A small cordless driver, an Allen key and two remaining bolts on a protective felt mat beside the near foot of the bed. Expensive believable oak joinery, no impossible floating components, bed fills most of image.",
+    "desk": "Use case: photorealistic-natural. Asset type: horizontal 3:2 photograph-style illustration for a premium furniture ASSEMBLY SERVICE website. Documentary interior photography, authentic material imperfections, straight verticals, ordinary natural window light, high photographic realism; not a glossy CGI showroom. No people, no hands, no faces, no dressers, no sideboards, no chests of drawers, no text, no logos, no collage. Furniture assembly must be immediately obvious. All geometry, joints, tools and fasteners must be physically plausible. Scene: refined small home office with warm oak flooring, ivory walls and soft daylight. Main subject: a substantial designer walnut writing DESK during final assembly, photographed at a low three-quarter angle showing the full desk and underside. Solid walnut top installed on two sturdy dark metal A-frame legs, rear steel crossbrace correctly bolted between legs. No drawers or cabinets. A cable tray partly fitted beneath the back edge, one end held by its mounting screws and the other resting on a simple timber support block on a small stool so it cannot float. A professional cordless driver, hex bits, two bolts and one small carton of fittings neatly placed on a felt work mat beside the desk. One matching finished bookcase behind. Focus on recognisable furniture assembly with credible construction and no visual trickery.",
+    "wardrobe_correction": "Use case: precise-object-edit. Edit this photograph-style furniture assembly illustration. Remove ONLY the detached loose door panel in the foreground and its two padded wooden trestles. Reveal the continuous protected oak floor beneath. Keep the large walnut wardrobe exactly as it is, including the two closed taupe doors on left and three open wardrobe carcasses with shelves/rails at right, all their installed hinge mounting plates, the room, lighting, windows, drill, hardware organizer and all other objects. Do not add any new objects. No humans, no hands. Photographic texture, realistic furniture installation in progress."
+  },
+  "stock_license": "https://www.pexels.com/legal-pages/license"
+}

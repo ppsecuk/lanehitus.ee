@@ -1,0 +1,92 @@
+{
+  "source_type": "licensed photographs",
+  "checked_on": "2026-10-15",
+  "usage": "Service illustrations, not evidence of LAN OÜ completed projects.",
+  "assets": [
+    {
+      "temp": "renovation-room",
+      "file": "drywall-real-interior.jpg",
+      "alt": "Монтаж гипсокартонных стен и потолка",
+      "position": "50% 25%",
+      "focus": [
+        "70% 10%",
+        1.08,
+        1.18
+      ],
+      "author": "Steffen Lemmerzahl",
+      "source": "https://unsplash.com/photos/a-room-that-has-some-paint-on-the-floor-Fxv9QVauyD0",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "camera": "SONY ILCE-7RM3",
+      "published": "2024-06-19"
+    },
+    {
+      "temp": "boarded-room",
+      "file": "drywall-real-joint-finishing.jpg",
+      "alt": "Стены и потолок из гипсокартона со швами под отделку",
+      "position": "50% 10%",
+      "focus": [
+        "50% 0%",
+        1.14,
+        1.25
+      ],
+      "author": "Brian Wangenheim",
+      "source": "https://unsplash.com/photos/a-large-room-with-a-lot-of-white-paint-on-the-walls-2ZMe-E2NBZ0",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "camera": "SONY ILCE-7RM2",
+      "published": "2024-12-05"
+    },
+    {
+      "temp": "green-drywall",
+      "file": "drywall-real-moisture-board.jpg",
+      "alt": "Влагостойкий гипсокартон с подготовленными швами",
+      "position": "50% 42%",
+      "focus": [
+        "65% 50%",
+        1,
+        1
+      ],
+      "author": "Tima Miroshnichenko",
+      "source": "https://www.pexels.com/photo/photo-of-green-wall-being-repaired-6474207/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "camera": "SONY ILCE-7M3",
+      "taken": "2020-11-25"
+    },
+    {
+      "temp": "work-lamp",
+      "file": "drywall-real-renovation.jpg",
+      "alt": "Подготовка стен в помещении во время ремонта",
+      "position": "50% 36%",
+      "focus": [
+        "50% 50%",
+        1,
+        1
+      ],
+      "author": "Fabian Kleiser",
+      "source": "https://unsplash.com/photos/a-construction-site-with-lighting-and-new-plaster-5XmE-ezUfpc",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "camera": "SONY ILCE-7M3",
+      "published": "2025-07-02"
+    },
+    {
+      "file": "drywall-real-small-room.jpg",
+      "alt": "Белые стены и углы в небольшой комнате во время ремонта",
+      "position": "50% 12%",
+      "focus": [
+        "50% 12%",
+        1,
+        1
+      ],
+      "author": "Josh Kobayashi",
+      "source": "https://www.pexels.com/photo/room-during-renovation-5404462/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "camera": "SONY ILCE-7M3",
+      "taken": "2020-09-02",
+      "published": "2020-09-21"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+# Credentials and local configuration
+.mail-config.json
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local notes and runtime artifacts
+NOTES.md
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+*.log
+*.pid

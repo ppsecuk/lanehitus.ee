@@ -1,0 +1,39 @@
+{
+  "approved_on": "2026-10-15",
+  "source_type": "AI-generated illustrations",
+  "usage": "Terrace service illustrations, not photographs of completed LAN projects.",
+  "main": "terrace-premium-townhouse-main-v1.jpg",
+  "selection": "Five natural-look luxury revisions approved by user; second displayed revision (A) is main.",
+  "photos": [
+    {
+      "file": "terrace-premium-townhouse-main-v1.jpg",
+      "source_generated_file": "exec-8ecef072-ed5a-43bb-8e1d-def09ce42551.png",
+      "alt": "Терраса у таунхауса со светлым диваном",
+      "framing": "Full 3:2 image; no cropping."
+    },
+    {
+      "file": "terrace-premium-penthouse-brown-v1.jpg",
+      "source_generated_file": "exec-e8fb65a4-26a0-4866-b901-6c016e6e44b4.png",
+      "alt": "Терраса пентхауса с тёмным деревянным настилом",
+      "framing": "Full 3:2 image; no cropping."
+    },
+    {
+      "file": "terrace-premium-townhouse-brick-v1.jpg",
+      "source_generated_file": "exec-35a563e4-d0c8-44a8-9506-926bcfc4ff2c.png",
+      "alt": "Терраса со ступенями у кирпичного таунхауса",
+      "framing": "Full 3:2 image; no cropping."
+    },
+    {
+      "file": "terrace-premium-installation-v1.jpg",
+      "source_generated_file": "exec-55c8818d-528d-41b9-b71a-df5cd4e5b619.png",
+      "alt": "Монтаж деревянной террасы у таунхауса",
+      "framing": "Full 3:2 image; no cropping."
+    },
+    {
+      "file": "terrace-premium-penthouse-light-v1.jpg",
+      "source_generated_file": "exec-8d43dbd1-66da-4c18-a409-07a99fc638d0.png",
+      "alt": "Светлая деревянная терраса пентхауса",
+      "framing": "Full 3:2 image; no cropping."
+    }
+  ]
+}

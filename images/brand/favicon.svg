@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>LAN Ehitus</title>
+  <rect width="64" height="64" rx="13" fill="#087d53"/>
+  <g fill="#fff" transform="translate(5 15) scale(.2076923077 .53125)">
+    <path d="M0 0h16v49h48v15H0z"/>
+    <path d="M70 64 107 0h24l37 64h-19l-30-51-30 51z"/>
+    <path d="M178 64V0h16l50 42V0h16v64h-16l-50-42v42z"/>
+  </g>
+</svg>
