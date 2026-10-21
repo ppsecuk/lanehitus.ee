@@ -1,0 +1,638 @@
+{
+  "images/about/anatoli-portrait.png": {
+    "height": 1448,
+    "variants": [
+      {
+        "bytes": 4778,
+        "height": 320,
+        "path": "images/optimized/anatoli-portrait-240w-e16fad1583407aad.webp",
+        "width": 240
+      },
+      {
+        "bytes": 18512,
+        "height": 640,
+        "path": "images/optimized/anatoli-portrait-480w-8547c2c9c51f4841.webp",
+        "width": 480
+      }
+    ],
+    "width": 1086
+  },
+  "images/brand/lan-ehitus-original.jpeg": {
+    "height": 284,
+    "variants": [
+      {
+        "bytes": 2010,
+        "height": 146,
+        "path": "images/optimized/lan-ehitus-original-192w-e3aaf51fee28eb83.webp",
+        "width": 192
+      },
+      {
+        "bytes": 4020,
+        "height": 284,
+        "path": "images/optimized/lan-ehitus-original-373w-3cd810f579397276.webp",
+        "width": 373
+      }
+    ],
+    "width": 373
+  },
+  "images/services/doors-premium-apartment-security-v2.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 6930,
+        "height": 320,
+        "path": "images/optimized/doors-premium-apartment-security-v2-480w-581777c264e7c4b2.webp",
+        "width": 480
+      },
+      {
+        "bytes": 24390,
+        "height": 640,
+        "path": "images/optimized/doors-premium-apartment-security-v2-960w-105c50fad6527d27.webp",
+        "width": 960
+      },
+      {
+        "bytes": 47454,
+        "height": 853,
+        "path": "images/optimized/doors-premium-apartment-security-v2-1280w-826e9f1ec17fa4a0.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/doors-premium-classic-closed-v2.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 4664,
+        "height": 320,
+        "path": "images/optimized/doors-premium-classic-closed-v2-480w-35959fafc2cdd919.webp",
+        "width": 480
+      },
+      {
+        "bytes": 12974,
+        "height": 640,
+        "path": "images/optimized/doors-premium-classic-closed-v2-960w-370092547311d2d3.webp",
+        "width": 960
+      },
+      {
+        "bytes": 20976,
+        "height": 853,
+        "path": "images/optimized/doors-premium-classic-closed-v2-1280w-86a06517936df547.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/doors-premium-exterior-house-v2.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 19446,
+        "height": 320,
+        "path": "images/optimized/doors-premium-exterior-house-v2-480w-419526763409efe1.webp",
+        "width": 480
+      },
+      {
+        "bytes": 100370,
+        "height": 640,
+        "path": "images/optimized/doors-premium-exterior-house-v2-960w-a2e3872f9b9d4ff6.webp",
+        "width": 960
+      },
+      {
+        "bytes": 189756,
+        "height": 853,
+        "path": "images/optimized/doors-premium-exterior-house-v2-1280w-2c49c66768e5abc8.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/doors-premium-flush-ivory-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 9196,
+        "height": 320,
+        "path": "images/optimized/doors-premium-flush-ivory-v1-480w-731772326bee90a5.webp",
+        "width": 480
+      },
+      {
+        "bytes": 31168,
+        "height": 640,
+        "path": "images/optimized/doors-premium-flush-ivory-v1-960w-7b218739856f0609.webp",
+        "width": 960
+      },
+      {
+        "bytes": 53620,
+        "height": 853,
+        "path": "images/optimized/doors-premium-flush-ivory-v1-1280w-3d95ae72203fc32d.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/doors-premium-oak-double-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 8208,
+        "height": 320,
+        "path": "images/optimized/doors-premium-oak-double-v1-480w-db2d1ae0f460e986.webp",
+        "width": 480
+      },
+      {
+        "bytes": 28910,
+        "height": 640,
+        "path": "images/optimized/doors-premium-oak-double-v1-960w-1e89cf06109a431d.webp",
+        "width": 960
+      },
+      {
+        "bytes": 51484,
+        "height": 853,
+        "path": "images/optimized/doors-premium-oak-double-v1-1280w-5b5bdb5e1e694583.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/drywall-premium-ceiling-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 15562,
+        "height": 320,
+        "path": "images/optimized/drywall-premium-ceiling-v1-480w-ffcc1d998ba21199.webp",
+        "width": 480
+      },
+      {
+        "bytes": 47556,
+        "height": 640,
+        "path": "images/optimized/drywall-premium-ceiling-v1-960w-c679ade8760b4138.webp",
+        "width": 960
+      },
+      {
+        "bytes": 74240,
+        "height": 853,
+        "path": "images/optimized/drywall-premium-ceiling-v1-1280w-a0a4bcca045bdc54.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/drywall-premium-finishing-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 11212,
+        "height": 320,
+        "path": "images/optimized/drywall-premium-finishing-v1-480w-3b687a41bd740f6c.webp",
+        "width": 480
+      },
+      {
+        "bytes": 28632,
+        "height": 640,
+        "path": "images/optimized/drywall-premium-finishing-v1-960w-cb4cad6e7de89ca4.webp",
+        "width": 960
+      },
+      {
+        "bytes": 42364,
+        "height": 853,
+        "path": "images/optimized/drywall-premium-finishing-v1-1280w-7c9d0f008a80f168.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/drywall-premium-lining-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 11950,
+        "height": 320,
+        "path": "images/optimized/drywall-premium-lining-v1-480w-18bc94e2a0c6d9a6.webp",
+        "width": 480
+      },
+      {
+        "bytes": 37784,
+        "height": 640,
+        "path": "images/optimized/drywall-premium-lining-v1-960w-1d2bf41a2bd6af23.webp",
+        "width": 960
+      },
+      {
+        "bytes": 60464,
+        "height": 853,
+        "path": "images/optimized/drywall-premium-lining-v1-1280w-0ea8b2ff5d88bf13.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/drywall-premium-moisture-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 14242,
+        "height": 320,
+        "path": "images/optimized/drywall-premium-moisture-v1-480w-5a55a770c6c783af.webp",
+        "width": 480
+      },
+      {
+        "bytes": 44544,
+        "height": 640,
+        "path": "images/optimized/drywall-premium-moisture-v1-960w-1f6355e917ce7e5e.webp",
+        "width": 960
+      },
+      {
+        "bytes": 73520,
+        "height": 853,
+        "path": "images/optimized/drywall-premium-moisture-v1-1280w-fceb6f1f70524947.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/drywall-premium-partition-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 18706,
+        "height": 320,
+        "path": "images/optimized/drywall-premium-partition-v1-480w-91caea193d3cfbbf.webp",
+        "width": 480
+      },
+      {
+        "bytes": 59068,
+        "height": 640,
+        "path": "images/optimized/drywall-premium-partition-v1-960w-86e4dbf271e2e02f.webp",
+        "width": 960
+      },
+      {
+        "bytes": 95646,
+        "height": 853,
+        "path": "images/optimized/drywall-premium-partition-v1-1280w-66032a6dbf772db8.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/flooring-parquet.jpg": {
+    "height": 934,
+    "variants": [
+      {
+        "bytes": 7078,
+        "height": 320,
+        "path": "images/optimized/flooring-parquet-480w-31f56df3311f919b.webp",
+        "width": 480
+      },
+      {
+        "bytes": 22072,
+        "height": 640,
+        "path": "images/optimized/flooring-parquet-960w-5b0a2ec9c7594d9d.webp",
+        "width": 960
+      },
+      {
+        "bytes": 35950,
+        "height": 854,
+        "path": "images/optimized/flooring-parquet-1280w-bb18744ebf748c2f.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1400
+  },
+  "images/services/flooring-premium-finish-detail-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 14370,
+        "height": 320,
+        "path": "images/optimized/flooring-premium-finish-detail-v1-480w-07a4023e421bf41b.webp",
+        "width": 480
+      },
+      {
+        "bytes": 45808,
+        "height": 640,
+        "path": "images/optimized/flooring-premium-finish-detail-v1-960w-b0e9c943c4619d6e.webp",
+        "width": 960
+      },
+      {
+        "bytes": 74386,
+        "height": 853,
+        "path": "images/optimized/flooring-premium-finish-detail-v1-1280w-c9b82812765c9d81.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/flooring-premium-laminate-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 14422,
+        "height": 320,
+        "path": "images/optimized/flooring-premium-laminate-v1-480w-823ff51486bdbf96.webp",
+        "width": 480
+      },
+      {
+        "bytes": 62836,
+        "height": 640,
+        "path": "images/optimized/flooring-premium-laminate-v1-960w-c1b11a90a5f4eaae.webp",
+        "width": 960
+      },
+      {
+        "bytes": 118036,
+        "height": 853,
+        "path": "images/optimized/flooring-premium-laminate-v1-1280w-25c5d811a0f3b94d.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/flooring-premium-smoked-parquet-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 17100,
+        "height": 320,
+        "path": "images/optimized/flooring-premium-smoked-parquet-v1-480w-54a204c8c1b8c865.webp",
+        "width": 480
+      },
+      {
+        "bytes": 60754,
+        "height": 640,
+        "path": "images/optimized/flooring-premium-smoked-parquet-v1-960w-bafdf62f3f163262.webp",
+        "width": 960
+      },
+      {
+        "bytes": 100712,
+        "height": 853,
+        "path": "images/optimized/flooring-premium-smoked-parquet-v1-1280w-55c03a0bcc5f1ee0.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/flooring-premium-wide-oak-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 19500,
+        "height": 320,
+        "path": "images/optimized/flooring-premium-wide-oak-v1-480w-902821dde1f59bd9.webp",
+        "width": 480
+      },
+      {
+        "bytes": 77578,
+        "height": 640,
+        "path": "images/optimized/flooring-premium-wide-oak-v1-960w-ea2c57f1d25a568d.webp",
+        "width": 960
+      },
+      {
+        "bytes": 135122,
+        "height": 853,
+        "path": "images/optimized/flooring-premium-wide-oak-v1-1280w-2b3b5d93291624e3.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/furniture-approved-chair-v5.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 33628,
+        "height": 320,
+        "path": "images/optimized/furniture-approved-chair-v5-480w-29f77ae0f29d568d.webp",
+        "width": 480
+      },
+      {
+        "bytes": 109796,
+        "height": 640,
+        "path": "images/optimized/furniture-approved-chair-v5-960w-dea032826b2c1640.webp",
+        "width": 960
+      },
+      {
+        "bytes": 164782,
+        "height": 853,
+        "path": "images/optimized/furniture-approved-chair-v5-1280w-56919dd52e1d4f1b.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/furniture-approved-kitchen-v5.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 15804,
+        "height": 320,
+        "path": "images/optimized/furniture-approved-kitchen-v5-480w-2c1a1bcbede9faed.webp",
+        "width": 480
+      },
+      {
+        "bytes": 52010,
+        "height": 640,
+        "path": "images/optimized/furniture-approved-kitchen-v5-960w-febb709db30ec30e.webp",
+        "width": 960
+      },
+      {
+        "bytes": 84586,
+        "height": 853,
+        "path": "images/optimized/furniture-approved-kitchen-v5-1280w-092b71a2cbe6aba2.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/furniture-approved-oak-wardrobe-v5.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 11950,
+        "height": 320,
+        "path": "images/optimized/furniture-approved-oak-wardrobe-v5-480w-5650710feb0f9900.webp",
+        "width": 480
+      },
+      {
+        "bytes": 38956,
+        "height": 640,
+        "path": "images/optimized/furniture-approved-oak-wardrobe-v5-960w-259efe52f587128f.webp",
+        "width": 960
+      },
+      {
+        "bytes": 66700,
+        "height": 853,
+        "path": "images/optimized/furniture-approved-oak-wardrobe-v5-1280w-7f25a2c28793a5e7.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/furniture-approved-sofa-v5.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 34412,
+        "height": 320,
+        "path": "images/optimized/furniture-approved-sofa-v5-480w-7ba90e4d275416ca.webp",
+        "width": 480
+      },
+      {
+        "bytes": 145680,
+        "height": 640,
+        "path": "images/optimized/furniture-approved-sofa-v5-960w-d937ada8ea9b47c2.webp",
+        "width": 960
+      },
+      {
+        "bytes": 239828,
+        "height": 853,
+        "path": "images/optimized/furniture-approved-sofa-v5-1280w-5724161df4dcf266.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/furniture-approved-wardrobe-main-v6.png": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 17934,
+        "height": 320,
+        "path": "images/optimized/furniture-approved-wardrobe-main-v6-480w-2bc82d202e0deccd.webp",
+        "width": 480
+      },
+      {
+        "bytes": 54588,
+        "height": 640,
+        "path": "images/optimized/furniture-approved-wardrobe-main-v6-960w-8fd830e7967dc3d4.webp",
+        "width": 960
+      },
+      {
+        "bytes": 88618,
+        "height": 853,
+        "path": "images/optimized/furniture-approved-wardrobe-main-v6-1280w-90a99cc9683c2b5c.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/terrace-premium-installation-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 40678,
+        "height": 320,
+        "path": "images/optimized/terrace-premium-installation-v1-480w-75176cc7dbb92961.webp",
+        "width": 480
+      },
+      {
+        "bytes": 147534,
+        "height": 640,
+        "path": "images/optimized/terrace-premium-installation-v1-960w-42339dbacbd51692.webp",
+        "width": 960
+      },
+      {
+        "bytes": 238242,
+        "height": 853,
+        "path": "images/optimized/terrace-premium-installation-v1-1280w-21b64d3c095f37ce.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/terrace-premium-penthouse-brown-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 24266,
+        "height": 320,
+        "path": "images/optimized/terrace-premium-penthouse-brown-v1-480w-ee079be6a1eaaa63.webp",
+        "width": 480
+      },
+      {
+        "bytes": 90532,
+        "height": 640,
+        "path": "images/optimized/terrace-premium-penthouse-brown-v1-960w-589eb74dfa2acc1e.webp",
+        "width": 960
+      },
+      {
+        "bytes": 153450,
+        "height": 853,
+        "path": "images/optimized/terrace-premium-penthouse-brown-v1-1280w-b50647ff28d20a97.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/terrace-premium-penthouse-light-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 32314,
+        "height": 320,
+        "path": "images/optimized/terrace-premium-penthouse-light-v1-480w-1fd3f6efd5064e10.webp",
+        "width": 480
+      },
+      {
+        "bytes": 116156,
+        "height": 640,
+        "path": "images/optimized/terrace-premium-penthouse-light-v1-960w-aa00c431b1f73acc.webp",
+        "width": 960
+      },
+      {
+        "bytes": 187192,
+        "height": 853,
+        "path": "images/optimized/terrace-premium-penthouse-light-v1-1280w-e0c631fabef500b1.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/terrace-premium-townhouse-brick-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 39064,
+        "height": 320,
+        "path": "images/optimized/terrace-premium-townhouse-brick-v1-480w-d9a7bd0d9e016d3a.webp",
+        "width": 480
+      },
+      {
+        "bytes": 151650,
+        "height": 640,
+        "path": "images/optimized/terrace-premium-townhouse-brick-v1-960w-d4cf79ecb37cf925.webp",
+        "width": 960
+      },
+      {
+        "bytes": 250880,
+        "height": 853,
+        "path": "images/optimized/terrace-premium-townhouse-brick-v1-1280w-302c7915f1151a1a.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  },
+  "images/services/terrace-premium-townhouse-main-v1.jpg": {
+    "height": 1024,
+    "variants": [
+      {
+        "bytes": 33508,
+        "height": 320,
+        "path": "images/optimized/terrace-premium-townhouse-main-v1-480w-85b5ef8af1570c05.webp",
+        "width": 480
+      },
+      {
+        "bytes": 132302,
+        "height": 640,
+        "path": "images/optimized/terrace-premium-townhouse-main-v1-960w-0fa70f9d2e2c277e.webp",
+        "width": 960
+      },
+      {
+        "bytes": 222610,
+        "height": 853,
+        "path": "images/optimized/terrace-premium-townhouse-main-v1-1280w-1611e925710f9481.webp",
+        "width": 1280
+      }
+    ],
+    "width": 1536
+  }
+}

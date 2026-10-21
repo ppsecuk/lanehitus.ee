@@ -263,6 +263,8 @@ body.gallery-open{overflow:hidden}.photo-gallery :focus-visible{outline-color:wh
 }
 
 .home-summary{max-width:none;width:100%;margin:20px 0 0;font-size:16px;line-height:1.75;color:var(--muted)}
+.home-promise{margin:16px 0 0;font-size:18px;line-height:1.5;color:var(--ink)}
+@media(max-width:700px){.home-promise{font-size:16px}}
 @media(max-width:700px){.home-summary{margin-top:16px;font-size:14px;line-height:1.65}}
 
 
@@ -467,6 +469,7 @@ body.gallery-open{overflow:hidden}.photo-gallery :focus-visible{outline-color:wh
 @media(max-width:700px){
  .price-table tbody tr{grid-template-columns:minmax(0,1fr) auto;align-items:center}
  .price-table tbody td:nth-child(2){width:auto;grid-column:2;grid-row:1;text-align:right;white-space:normal}
+ .price-table tbody td:nth-child(2) strong{font-size:28px;line-height:1.15;white-space:nowrap}
  .price-unit{display:block;font-size:12px;line-height:1.5}
 }
 

@@ -1,0 +1,2 @@
+# The cp314 wheel supports the project's Python 3.14 build environment.
+Pillow==13.0.0

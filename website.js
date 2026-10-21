@@ -185,7 +185,7 @@ for(const [selector,label] of [
 ])gallery.querySelector(selector).setAttribute('aria-label',t(label));
 document.body.append(gallery);
 let galleryOwner=null,galleryOpener=null;
-function updateGallery(){if(!galleryOwner)return;const {slides,index}=galleryOwner.snapshot();const image=gallery.querySelector('.gallery-image');image.src=slides[index].src;image.alt=slides[index].alt;gallery.querySelector('.gallery-caption-text').textContent=(index+1)+' / '+slides.length+' · '+slides[index].alt;gallery.classList.toggle('is-single',slides.length===1);}
+function updateGallery(){if(!galleryOwner)return;const {slides,index}=galleryOwner.snapshot();const image=gallery.querySelector('.gallery-image');image.src=slides[index].dataset.fullsrc||slides[index].currentSrc||slides[index].src;image.alt=slides[index].alt;gallery.querySelector('.gallery-caption-text').textContent=(index+1)+' / '+slides.length+' · '+slides[index].alt;gallery.classList.toggle('is-single',slides.length===1);}
 function openGallery(owner,opener,title){galleryOwner=owner;galleryOpener=opener;gallery.querySelector('#gallery-title').textContent=title;updateGallery();gallery.showModal();document.body.classList.add('gallery-open');document.dispatchEvent(new Event('gallerychange'));}
 gallery.querySelector('.gallery-close').addEventListener('click',()=>gallery.close());
 // The image uses object-fit:contain; its element also covers the letterbox space.
@@ -215,16 +215,73 @@ function enableSwipe(element,onSwipe,onStart=()=>{},onEnd=()=>{}){
  element.addEventListener('click',e=>{if(suppressClick){e.preventDefault();e.stopImmediatePropagation();suppressClick=false;}},true);
 }
 enableSwipe(gallery.querySelector('.gallery-stage'),galleryStep);
+// Deferred previews acquire sources only when needed. Cache in-flight loads and
+// successful decodes, but allow a later interaction to retry a failed image.
+const carouselImageLoads=new WeakMap();
+function loadCarouselImage(image){
+ const existing=carouselImageLoads.get(image);
+ if(existing)return existing;
+ const pending=new Promise(resolve=>{
+  let settled=false,decoding=false;
+  function finish(ready){
+   if(settled)return;
+   settled=true;clearTimeout(timeout);
+   image.removeEventListener('load',loaded);image.removeEventListener('error',failed);
+   resolve(ready);
+  }
+  function loaded(){
+   if(settled||decoding)return;
+   if(!image.naturalWidth){finish(false);return;}
+   decoding=true;
+   try{Promise.resolve(image.decode?.()).then(()=>finish(image.naturalWidth>0),()=>finish(false));}
+   catch{finish(false);}
+  }
+  function failed(){finish(false);}
+  const timeout=setTimeout(failed,20000);
+  image.addEventListener('load',loaded);image.addEventListener('error',failed);
+  const source=image.dataset.src||image.getAttribute('src');
+  const sources=image.dataset.srcset||image.getAttribute('srcset');
+  if(!source&&!sources){finish(false);return;}
+  // Reassign an already failed URL so another attempt emits fresh load events.
+  if(image.complete&&!image.naturalWidth){image.removeAttribute('srcset');image.removeAttribute('src');}
+  image.loading='eager';
+  if(sources&&image.getAttribute('srcset')!==sources)image.setAttribute('srcset',sources);
+  if(source&&image.getAttribute('src')!==source)image.setAttribute('src',source);
+  // Cached images can finish before a load listener observes an event.
+  if(image.complete&&image.naturalWidth)loaded();
+ });
+ carouselImageLoads.set(image,pending);
+ pending.then(ready=>{if(!ready&&carouselImageLoads.get(image)===pending)carouselImageLoads.delete(image);});
+ return pending;
+}
 // Independent 5-second carousels with staggered starts.
 document.querySelectorAll('.service-carousel').forEach(carousel=>{
  const slides=[...carousel.querySelectorAll('.carousel-slide')];
+ if(!slides.length)return;
  const motion=matchMedia('(prefers-reduced-motion: reduce)');
- let index=0,paused=motion.matches,hovered=false,focused=false,visible=true,dragging=false,timer=null;
- function paint(){slides.forEach((slide,i)=>{slide.classList.toggle('is-active',i===index);slide.setAttribute('aria-hidden',String(i!==index));});}
+ let index=0,displayedIndex=0,requestVersion=0,transitioning=false;
+ let paused=motion.matches,hovered=false,focused=false,visible=false,dragging=false,timer=null;
+ function paint(){slides.forEach((slide,i)=>{slide.classList.toggle('is-active',i===displayedIndex);slide.setAttribute('aria-hidden',String(i!==displayedIndex));});}
  const autoplayOffset=Math.floor(Math.random()*3000);
- function advance(){index=(index+1)%slides.length;paint();timer=setTimeout(advance,5000);}
- function sync(){clearTimeout(timer);timer=null;if(!paused&&!hovered&&!focused&&visible&&!document.hidden&&!dragging&&!gallery.open)timer=setTimeout(advance,5000+autoplayOffset);}
- function go(next){index=(next+slides.length)%slides.length;paint();sync();}
+ function advance(){timer=null;void go(index+1,true);}
+ function sync(delay=5000+autoplayOffset){clearTimeout(timer);timer=null;if(slides.length>1&&!transitioning&&!paused&&!hovered&&!focused&&visible&&!document.hidden&&!dragging&&!gallery.open)timer=setTimeout(advance,delay);}
+ function preloadNext(){if(slides.length>1&&visible&&!document.hidden&&!gallery.open)void loadCarouselImage(slides[(index+1)%slides.length]);}
+ async function go(next,autoplay=false){
+  const version=++requestVersion;
+  index=((next%slides.length)+slides.length)%slides.length;
+  transitioning=true;sync();
+  const ready=await loadCarouselImage(slides[index]);
+  // Rapid navigation may finish out of order; only its latest target can paint.
+  if(version!==requestVersion)return;
+  if(ready){displayedIndex=index;paint();}
+  transitioning=false;preloadNext();sync(autoplay?5000:5000+autoplayOffset);
+ }
+ function setVisible(next){
+  if(visible===next)return;
+  visible=next;
+  if(visible&&!document.hidden)void go(index);
+  else sync();
+ }
  const owner={snapshot:()=>({slides,index}),step:direction=>go(index+direction)};
  carousel.querySelector('.carousel-prev').addEventListener('click',()=>go(index-1));
  carousel.querySelector('.carousel-next').addEventListener('click',()=>go(index+1));
@@ -238,9 +295,21 @@ document.querySelectorAll('.service-carousel').forEach(carousel=>{
  carousel.addEventListener('focusout',e=>{focused=carousel.contains(e.relatedTarget);sync();});
  carousel.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();go(index+(e.key==='ArrowRight'?1:-1));}});
  enableSwipe(carousel,direction=>go(index+direction),()=>{dragging=true;sync();},()=>{dragging=false;sync();});
- document.addEventListener('visibilitychange',sync);document.addEventListener('gallerychange',sync);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&visible)void go(index);else sync();});
+ document.addEventListener('gallerychange',()=>{if(!gallery.open&&visible&&!document.hidden)void go(index);else sync();});
  motion.addEventListener('change',()=>{paused=motion.matches;sync();});
- if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();});observer.observe(carousel);}
+ if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{setVisible(entries[0].isIntersecting);});observer.observe(carousel);}
+ else{
+  let visibilityFrame=null;
+  function updateVisibility(){
+   visibilityFrame=null;
+   const bounds=carousel.getBoundingClientRect();
+   setVisible(bounds.bottom>0&&bounds.top<innerHeight&&bounds.right>0&&bounds.left<innerWidth);
+  }
+  function queueVisibility(){if(visibilityFrame===null)visibilityFrame=requestAnimationFrame(updateVisibility);}
+  window.addEventListener('scroll',queueVisibility,{passive:true});window.addEventListener('resize',queueVisibility,{passive:true});
+  updateVisibility();
+ }
  paint();sync();
 });
 

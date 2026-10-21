@@ -90,7 +90,7 @@ class Handler(SimpleHTTPRequestHandler):
         except (OSError, ValueError):
             self.send_error(404); return
         canonical = '/' + relative.as_posix() if relative.parts else '/'
-        allowed = canonical in ('/', '/index.html', '/ru', '/ru/index.html', '/website.js', '/website.i18n.js', '/website.css', '/lan-ehitus.svg') or canonical.startswith(('/images/', '/fonts/')) or (canonical.startswith('/service-') and canonical.endswith('.jpg')) or canonical == '/preview-room.jpg'
+        allowed = canonical in ('/', '/index.html', '/ru', '/ru/index.html', '/robots.txt', '/sitemap.xml', '/website.js', '/website.i18n.js', '/website.css', '/lan-ehitus.svg') or canonical.startswith(('/images/', '/fonts/')) or (canonical.startswith('/service-') and canonical.endswith('.jpg')) or canonical == '/preview-room.jpg'
         if not allowed or any(part.startswith('.') for part in relative.parts):
             self.send_error(404); return
         super().do_GET()

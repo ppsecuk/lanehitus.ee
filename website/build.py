@@ -1,6 +1,26 @@
 from pathlib import Path
 from html import escape
+import json
+
 ROOT=Path(__file__).resolve().parent.parent
+IMAGE_ASSETS=json.loads((ROOT/'website'/'image-assets.json').read_text())
+CAROUSEL_SIZES='(max-width:360px) calc(100vw - 32px), (max-width:700px) calc(100vw - 40px), (max-width:960px) calc((100vw - 92px) * .48), (max-width:1204px) calc((100vw - 108px) * .48), 526px'
+STRIP_SIZES='(max-width:700px) 86vw, 40vw'
+
+def image_sources(photo,sizes,deferred=False):
+ asset=IMAGE_ASSETS.get(photo)
+ if not asset or not asset['variants']:
+  raise ValueError(f'Missing optimized image: {photo}. Run website/optimize_images.py first.')
+ variants=asset['variants']
+ for variant in variants:
+  if not (ROOT/variant['path']).is_file():
+   raise ValueError(f"Missing preview: {variant['path']}. Run website/optimize_images.py first.")
+ prefix='data-' if deferred else ''
+ attrs={prefix+'src':'/'+variants[0]['path'],
+        prefix+'srcset':', '.join(f"/{v['path']} {v['width']}w" for v in variants),
+        'sizes':sizes,'data-fullsrc':'/'+photo}
+ return ' '.join(f'{key}="{escape(value,quote=True)}"' for key,value in attrs.items())
+
 services=[
  ('terraces','Террасы','Террасы','images/services/terrace-premium-townhouse-main-v1.jpg','Монтаж и демонтаж террас.','Устанавливаем и демонтируем террасы, настилы, ступени и ограждения. Обновляем изношенные элементы.',['Установка новой террасы','Демонтаж старой террасы','Настил, ступени и ограждения','Замена отдельных элементов'],['Примерные размеры и высота террасы','Фотографии места и существующей конструкции','Пожелания к материалу и ограждению']),
  ('drywall','Гипсокартон','Гипсокартон','images/services/drywall-premium-partition-v1.jpg','Все работы с гипсокартоном.','Монтируем перегородки, обшивку стен и потолки из гипсокартона. Подготавливаем поверхности к отделке.',['Перегородки и обшивка стен','Потолки из гипсокартона','Монтаж и демонтаж конструкций','Заделка швов и подготовка к отделке'],['Размеры помещения и план работ','Фотографии стен и потолка','Пожелания к конструкции и отделке']),
@@ -132,12 +152,16 @@ def photo_preview_style(photo,position):
   style+=f';--preview-origin:{origin};--preview-zoom:{zoom};--preview-mobile-zoom:{mobile_zoom}'
  return style
 
+def carousel_image(slug,index,photo,alt,position):
+ loading=('loading="eager" fetchpriority="high"' if slug=='terraces' else 'loading="lazy"') if index==0 else ''
+ return f'<img {image_sources(photo,CAROUSEL_SIZES,deferred=index!=0)} {loading} alt="{alt} — иллюстрация услуги" style="{photo_preview_style(photo,position)}" decoding="async" width="640" height="420" draggable="false" aria-hidden="{str(index!=0).lower()}" class="carousel-slide{ " is-active" if index==0 else ""}">'
+
 def rows():
  galleries=gallery_photos()
  result=[]
  for slug,title,key,img,tag,desc,scope,prep in services:
   photos=galleries[slug]
-  slides=''.join(f'<img src="/{photo}" alt="{alt} — иллюстрация услуги" style="{photo_preview_style(photo,position)}" decoding="async" width="640" height="420" draggable="false" aria-hidden="{str(i!=0).lower()}" class="carousel-slide{ " is-active" if i==0 else ""}">' for i,(photo,alt,position) in enumerate(photos))
+  slides=''.join(carousel_image(slug,i,photo,alt,position) for i,(photo,alt,position) in enumerate(photos))
   gallery=f'<div class="service-carousel{" is-single" if len(photos)==1 else ""}" data-gallery="{slug}" role="region" aria-roledescription="карусель" aria-label="{title}: фотографии"><div class="carousel-viewport">{slides}</div><button type="button" class="carousel-open" aria-label="Увеличить фотографию: {title}" aria-haspopup="dialog"><span class="carousel-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.3 15.3 5 5M10.5 7.5v6M7.5 10.5h6"/></svg></span></button><button type="button" class="carousel-prev carousel-direction" aria-label="Предыдущее фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><button type="button" class="carousel-next carousel-direction" aria-label="Следующее фото"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button></div>'
   check_icon='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 4 4L19 6"/></svg>'
   highlights='<ul class="service-highlights" role="list">'+''.join(f'<li>{check_icon}<span>{escape(item)}</span></li>' for item in scope)+'</ul>'
@@ -151,7 +175,7 @@ def band():
 PAGES = {}
 def page(path,title,description,body):
  PAGES[path] = (title,description,body)
-page('/','Работы для вашего дома','Террасы, гипсокартон, паркет и ламинат, двери, сборка мебели в Таллинне и Харьюмаа.', '<section class="home-intro"><div><h1>Просто позвоните нам, всё остальное мы сделаем сами</h1><p class="home-summary">LAN OÜ выполняет строительные и отделочные работы для дома и квартиры в Таллинне и Харьюмаа. Устанавливаем и демонтируем террасы, обновляем настил, ступени и ограждения. Монтируем перегородки, обшивку стен и потолки из гипсокартона, укладываем паркет и ламинат, устанавливаем и демонтируем двери, собираем шкафы и другую корпусную мебель. Берёмся за отдельные задачи и несколько работ на одном объекте. Перед началом обсуждаем объём, материалы и стоимость. За нашей работой — 20 лет опыта в строительстве и ремонте.</p></div></section><section>'+rows()+'<article class="service-row other-service"><img src="/images/services/other-task.svg" alt="" width="640" height="420"><div><h3>Другая задача</h3><p>Не нашли нужную услугу? Опишите, что вы хотите сделать для дома или участка — обсудим, чем можем помочь.</p><span class="service-action"><a class="service-button service-price" href="#description" data-service="Другая задача">Описать свою задачу</a></span></div></article></section><section class="section"><div class="section-heading"><h2>От задачи к результату</h2><a href="/process/">Как работаем ↗</a></div><div class="steps"><article><span>Обсуждение</span><h3>Расскажите, что нужно</h3><p>Описание, фотографии и место проведения работ помогут начать разговор.</p></article><article><span>Подготовка</span><h3>Уточним детали</h3><p>Объём, материалы, стоимость и сроки обсуждаются до начала работ.</p></article><article><span>Работа</span><h3>Согласуем следующий шаг</h3><p>Выезд, подготовку и порядок выполнения определяем для вашей задачи.</p></article></div></section><section class="section narrow"><h2>Частые вопросы</h2>'+accordion(faqs[:3])+'<a class="text-link" href="/faq/">Все вопросы и ответы ↗</a></section>'+band())
+page('/','Работы для вашего дома','Террасы, гипсокартон, паркет и ламинат, двери, сборка мебели в Таллинне и Харьюмаа.', '<section class="home-intro"><div><h1>Строительные и отделочные работы в Таллинне и Харьюмаа</h1><p class="home-promise">Просто позвоните нам, всё остальное мы сделаем сами</p><p class="home-summary">LAN OÜ выполняет строительные и отделочные работы для дома и квартиры в Таллинне и Харьюмаа. Устанавливаем и демонтируем террасы, обновляем настил, ступени и ограждения. Монтируем перегородки, обшивку стен и потолки из гипсокартона, укладываем паркет и ламинат, устанавливаем и демонтируем двери, собираем шкафы и другую корпусную мебель. Берёмся за отдельные задачи и несколько работ на одном объекте. Перед началом обсуждаем объём, материалы и стоимость. За нашей работой — 20 лет опыта в строительстве и ремонте.</p></div></section><section>'+rows()+'<article class="service-row other-service"><img src="/images/services/other-task.svg" alt="" width="640" height="420"><div><h3>Другая задача</h3><p>Не нашли нужную услугу? Опишите, что вы хотите сделать для дома или участка — обсудим, чем можем помочь.</p><span class="service-action"><a class="service-button service-price" href="#description" data-service="Другая задача">Описать свою задачу</a></span></div></article></section><section class="section"><div class="section-heading"><h2>От задачи к результату</h2><a href="/process/">Как работаем ↗</a></div><div class="steps"><article><span>Обсуждение</span><h3>Расскажите, что нужно</h3><p>Описание, фотографии и место проведения работ помогут начать разговор.</p></article><article><span>Подготовка</span><h3>Уточним детали</h3><p>Объём, материалы, стоимость и сроки обсуждаются до начала работ.</p></article><article><span>Работа</span><h3>Согласуем следующий шаг</h3><p>Выезд, подготовку и порядок выполнения определяем для вашей задачи.</p></article></div></section><section class="section narrow"><h2>Частые вопросы</h2>'+accordion(faqs[:3])+'<a class="text-link" href="/faq/">Все вопросы и ответы ↗</a></section>'+band())
 page('/services/','Услуги','Террасы, гипсокартон, паркет и ламинат, двери, сборка мебели. Выберите направление работ.', '<section class="page-intro"><p class="eyebrow">ЧЕМ МОЖЕМ ПОМОЧЬ</p><h1>Работы для дома.<br><em>Большие и небольшие.</em></h1><p class="lead">Выберите направление, чтобы узнать подробности и подготовить обращение.</p></section>'+rows()+'<a class="other-row" href="/contact/?service=Другая%20задача">Не нашли свою задачу? Расскажите о ней ↗</a><p class="photo-note">Фотографии иллюстрируют направления работ.</p>'+band())
 for slug,title,key,img,tag,desc,scope,prep in services:
  page('/services/'+slug+'/',title,desc, f'<section class="detail-hero"><div><p class="eyebrow">УСЛУГИ LAN OÜ</p><h1>{title}</h1><p class="lead">{tag}</p><p>{desc}</p>'+cta(key)+'</div><figure><img src="/'+img+'" alt="Иллюстрация: '+title.lower()+'" width="640" height="420"><figcaption>Иллюстрация направления работ.</figcaption></figure></section><section class="two-column section"><div><h2>Какие задачи обсудим</h2><ul class="lined-list">'+''.join('<li>'+x+'</li>' for x in scope)+'</ul></div><div><h2>Что подготовить</h2><ul class="lined-list">'+''.join('<li>'+x+'</li>' for x in prep)+'</ul><p class="muted">Нет точных размеров? Начните с описания — уточним детали в разговоре.</p></div></section><section class="info-block"><h2>Стоимость и сроки</h2><p>Зависят от объёма работ, материалов и состояния объекта. Укажите населённый пункт и желаемые сроки: обсудим возможность выезда и данные для расчёта.</p>'+cta(key,'Обсудить стоимость')+'</section><section class="section"><h2>Другие направления</h2><div class="related">'+''.join(f'<a href="/services/{a}/">{b} ↗</a>' for a,b,*_ in services if a!=slug)+'</div></section>')
@@ -179,7 +203,7 @@ all_gallery_photos=gallery_photos()
 for slug,title,key,img,tag,desc,scope,prep in services:
  lead,topics=service_detail_copy[slug]
  cards=''.join(f'<article class="service-detail-card"><h3>{heading}</h3><p>{copy}</p></article>' for heading,copy in topics)
- photos=''.join(f'<button type="button" class="service-photo" data-photo-index="{i}" aria-label="Открыть фото {i+1}: {alt}"><img src="/{photo}" alt="{alt} — иллюстрация услуги" loading="lazy" decoding="async" draggable="false" width="400" height="250" style="{photo_preview_style(photo,position)}"></button>' for i,(photo,alt,position) in enumerate(all_gallery_photos[slug]))
+ photos=''.join(f'<button type="button" class="service-photo" data-photo-index="{i}" aria-label="Открыть фото {i+1}: {alt}"><img {image_sources(photo,STRIP_SIZES)} alt="{alt} — иллюстрация услуги" loading="lazy" decoding="async" draggable="false" width="400" height="250" style="{photo_preview_style(photo,position)}"></button>' for i,(photo,alt,position) in enumerate(all_gallery_photos[slug]))
  photo_strip=f'<div class="service-photo-strip" data-service-gallery="{slug}" role="group" aria-label="Фотографии: {title}. Прокрутите по горизонтали">{photos}</div>'
  details+=f'<section id="{slug}" class="service-detail section" aria-labelledby="{slug}-title"><div class="service-detail-heading"><h2 id="{slug}-title">{title}</h2><p class="lead">{lead}</p></div><div class="service-detail-cards">{cards}</div>{photo_strip}</section>'
 body=home+'<div class="service-details">'+details+'</div>'
@@ -189,7 +213,7 @@ for key in ['about','contact']:
  body+=f'<section id="{key}" class="long-section" aria-label="{PAGES["/"+key+"/"][0]}">'+section_content('/'+key+'/')+'</section>'
 
 links=''.join(f'<a href="#{path.strip("/")}">{label}</a>' for path,label in nav)
-html=f'''<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#087d53"><link rel="icon" type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48" href="/images/brand/favicon.ico?v=1"><link rel="icon" type="image/png" sizes="16x16" href="/images/brand/favicon-16.png?v=1"><link rel="icon" type="image/png" sizes="32x32" href="/images/brand/favicon-32.png?v=1"><link rel="icon" type="image/svg+xml" sizes="any" href="/images/brand/favicon.svg?v=1"><link rel="apple-touch-icon" sizes="180x180" href="/images/brand/apple-touch-icon.png?v=1"><title>LAN OÜ — Террасы, гипсокартон, полы, двери и сборка мебели в Таллинне</title><meta name="description" content="LAN OÜ: установка и демонтаж террас и дверей, работы с гипсокартоном, укладка паркета и ламината, сборка мебели в Таллинне и Харьюмаа. 20 лет опыта."><link rel="stylesheet" href="/website.css?v=touch-track-16"><script src="/website.i18n.js?v=door-rates-12" defer></script><script src="/website.js?v=publish-17" defer></script></head><body id="top"><a class="skip" href="#main">Перейти к содержанию</a><header><div class="header-inner wrap"><a class="brand" href="/" data-scroll-top aria-label="LAN Ehitus — в начало"><img src="/images/brand/lan-ehitus-original.jpeg?v=1" width="373" height="284" alt="LAN Ehitus"></a><button class="menu-button" aria-expanded="false" aria-controls="navigation" aria-label="Открыть меню"><span></span><span></span><span></span></button><nav id="navigation" aria-label="Основная навигация">{links}<details class="language-picker"><summary aria-label="Выбор языка: эстонский">ET</summary><div class="language-options"><button type="button" data-language="et" lang="et" aria-current="true">Eesti</button><button type="button" data-language="ru" lang="ru">Русский</button></div></details></nav></div></header><main id="main" class="wrap">{body}</main><footer><div class="wrap footer-grid"><div><a class="footer-brand" href="/" data-scroll-top>LAN OÜ</a><p>Работы для вашего дома в Таллинне и Харьюмаа.</p><small>Регистрационный код: 17505187</small></div><nav aria-label="Навигация в подвале">{links}</nav><div><a href="tel:+3725232477">+372 523 2477</a><a href="mailto:lebjodkin.toll68@gmail.com">lebjodkin.toll68@gmail.com</a></div></div><div class="wrap footer-bottom"><span>© <span data-current-year></span> LAN OÜ</span><a href="/" data-scroll-top>Наверх ↑</a></div></footer></body></html>'''
+html=f'''<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#087d53"><link rel="icon" type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48" href="/images/brand/favicon.ico?v=1"><link rel="icon" type="image/png" sizes="16x16" href="/images/brand/favicon-16.png?v=1"><link rel="icon" type="image/png" sizes="32x32" href="/images/brand/favicon-32.png?v=1"><link rel="icon" type="image/svg+xml" sizes="any" href="/images/brand/favicon.svg?v=1"><link rel="apple-touch-icon" sizes="180x180" href="/images/brand/apple-touch-icon.png?v=1"><title>Ремонт и отделочные работы в Таллинне и Харьюмаа | LAN Ehitus</title><meta name="description" content="LAN OÜ: террасы, гипсокартон, укладка паркета и ламината, установка дверей и сборка мебели в Таллинне и Харьюмаа. 20 лет опыта. Обсудим вашу задачу."><link rel="stylesheet" href="/website.css?v=seo-20"><script src="/website.i18n.js?v=seo-20" defer></script><script src="/website.js?v=performance-19" defer></script></head><body id="top"><a class="skip" href="#main">Перейти к содержанию</a><header><div class="header-inner wrap"><a class="brand" href="/" data-scroll-top aria-label="LAN Ehitus — в начало"><img src="/images/brand/lan-ehitus-original.jpeg?v=1" width="373" height="284" alt="LAN Ehitus"></a><button class="menu-button" aria-expanded="false" aria-controls="navigation" aria-label="Открыть меню"><span></span><span></span><span></span></button><nav id="navigation" aria-label="Основная навигация">{links}<details class="language-picker"><summary aria-label="Выбор языка: эстонский">ET</summary><div class="language-options"><button type="button" data-language="et" lang="et" aria-current="true">Eesti</button><button type="button" data-language="ru" lang="ru">Русский</button></div></details></nav></div></header><main id="main" class="wrap">{body}</main><footer><div class="wrap footer-grid"><div><a class="footer-brand" href="/" data-scroll-top>LAN OÜ</a><p>Работы для вашего дома в Таллинне и Харьюмаа.</p><small>Регистрационный код: 17505187</small></div><nav aria-label="Навигация в подвале">{links}</nav><div><a href="tel:+3725232477">+372 523 2477</a><a href="mailto:lebjodkin.toll68@gmail.com">lebjodkin.toll68@gmail.com</a></div></div><div class="wrap footer-bottom"><span>© <span data-current-year></span> LAN OÜ</span><a href="/" data-scroll-top>Наверх ↑</a></div></footer></body></html>'''
 
 def local_link(match):
  url=urlsplit(match.group(1))
@@ -198,6 +222,9 @@ def local_link(match):
  selected=parse_qs(url.query).get('service',[''])[0]
  data=f' data-service="{escape(selected,quote=True)}"' if selected else ''
  return f'href="#{target}"'+data
+# Small responsive previews are independent of the full-size viewer originals.
+html=html.replace('src="/images/brand/lan-ehitus-original.jpeg?v=1"',image_sources('images/brand/lan-ehitus-original.jpeg','(max-width:700px) 158px, 165px'))
+html=html.replace('src="/images/about/anatoli-portrait.png"',image_sources('images/about/anatoli-portrait.png','(max-width:700px) 68px, 82px'))
 html=re.sub(r'href="(/[^" ]*)"',local_link,html)
 html=html.replace('href="#top" data-scroll-top','href="/" data-scroll-top')
 # Basic scraper deterrence, not a security boundary: decode only after interaction.
@@ -205,6 +232,7 @@ html=html.replace('href="tel:+3725232477"', 'href="#contact" data-contact="phone
 html=html.replace('href="mailto:lebjodkin.toll68@gmail.com"', 'href="#contact" data-contact="email"')
 html=html.replace('+372 523 2477','Позвонить').replace('lebjodkin.toll68@gmail.com','Написать email')
 from i18n import load_catalog, render_page, runtime_bundle
+from seo import write_crawler_files
 catalog=load_catalog()
 estonian=render_page(html,'et',catalog)
 russian=render_page(html,'ru',catalog)
@@ -213,9 +241,11 @@ russian=render_page(html,'ru',catalog)
 (ROOT/'website.i18n.js').write_text(runtime_bundle(catalog))
 (ROOT/'index.html').write_text(estonian)
 # Old bookmarks lead to the matching section, not a second copy of the site.
-for path in PAGES:
- if path=='/':continue
- target='contact' if path in ('/process/','/faq/','/privacy/') else path.strip('/').split('/')[-1]
- redirect=f'''<!doctype html><html lang="et"><head><meta charset="utf-8"><title>LAN OÜ</title><meta http-equiv="refresh" content="0;url=/#{target}"><script>location.replace('/'+location.search+'#{target}');</script></head><body><a href="/#{target}">Mine jaotisse</a></body></html>'''
+legacy_targets={path:('contact' if path in ('/process/','/faq/','/privacy/') else path.strip('/').split('/')[-1]) for path in PAGES if path!='/'}
+# Retired services remain valid bookmarks even after their definitions disappear.
+legacy_targets.update({'/services/woodwork/':'services','/services/renovation/':'services'})
+for path,target in legacy_targets.items():
+ redirect=f'''<!doctype html><html lang="et"><head><meta charset="utf-8"><title>LAN OÜ</title><meta name="robots" content="noindex, follow"><link rel="canonical" href="https://lanehitus.ee/"><meta http-equiv="refresh" content="0;url=/#{target}"><script>location.replace('/'+location.search+'#{target}');</script></head><body><a href="/#{target}">Mine jaotisse</a></body></html>'''
  dest=ROOT/path.strip('/')/'index.html';dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(redirect)
-print(f'Built Estonian /, Russian /ru/ and {len(PAGES)-1} legacy redirects')
+write_crawler_files(ROOT)
+print(f'Built Estonian /, Russian /ru/, robots.txt, sitemap.xml and {len(legacy_targets)} legacy redirects')

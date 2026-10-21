@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 import re
 
+from seo import render_metadata
+
 LANGUAGES = {"et": "/", "ru": "/ru/"}
 TEXT_ATTRIBUTES = {"alt", "aria-label", "aria-roledescription", "placeholder", "title"}
 VOID_ELEMENTS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
@@ -105,10 +107,9 @@ def render_page(source, language, catalog):
     page, count = re.subn(r'<details class="language-picker">.*?</details>', lambda _: picker, page, flags=re.S)
     if count != 1:
         raise ValueError("Expected exactly one language picker")
-    base = "https://lanehitus.ee"
-    metadata = f'<link rel="canonical" href="{base}{LANGUAGES[language]}">'
-    metadata += "".join(f'<link rel="alternate" hreflang="{code}" href="{base}{path}">' for code, path in LANGUAGES.items())
-    metadata += f'<link rel="alternate" hreflang="x-default" href="{base}/">'
+    title = unescape(re.search(r'<title>(.*?)</title>', page, re.S)[1])
+    description = unescape(re.search(r'<meta name="description" content="([^"]*)">', page)[1])
+    metadata = render_metadata(language, title, description)
     return page.replace("</head>", metadata + "</head>", 1)
 
 

@@ -1,0 +1,44 @@
+RewriteEngine On
+
+# Keep HTTP certificate validation available while OVH issues or renews SSL.
+RewriteRule ^\.well-known/acme-challenge/ - [L]
+
+# OVH Web Hosting uses HTTPS; Cloud Web exposes the ENV:HTTPS flag instead.
+RewriteCond %{HTTPS} !=on
+RewriteCond %{ENV:HTTPS} !=on
+RewriteRule ^ https://lanehitus.ee%{REQUEST_URI} [R=301,L]
+
+# HTTPS must first have a valid www certificate, managed by OVH.
+RewriteCond %{HTTP_HOST} ^www\.lanehitus\.ee(?::[0-9]+)?$ [NC]
+RewriteRule ^ https://lanehitus.ee%{REQUEST_URI} [R=301,L]
+
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Static asset URLs must change whenever their content changes.
+    <FilesMatch "\.(?:css|js|jpe?g|png|webp|svg|ico|ttf|woff2?)$">
+        Header set Cache-Control "public, max-age=2592000"
+        Header unset Expires
+    </FilesMatch>
+
+    # Optimized previews contain an encoded-content hash in their filename.
+    <FilesMatch "-[0-9]+w-[0-9a-f]{16}\.webp$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # Revalidate pages so visitors discover new versioned asset URLs.
+    <FilesMatch "\.html$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+
+    <FilesMatch "^(?:robots\.txt|sitemap\.xml)$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+
+    # Earlier design experiments remain accessible but are not search pages.
+    <FilesMatch "^(?!index\.html$).+\.html$">
+        Header set X-Robots-Tag "noindex, follow"
+    </FilesMatch>
+</IfModule>

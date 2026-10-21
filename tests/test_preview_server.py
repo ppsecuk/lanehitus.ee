@@ -22,7 +22,8 @@ class PreviewPathTests(unittest.TestCase):
         for name in ('index.html', 'ru/index.html', 'website.js', 'website.i18n.js',
                      'website.css', 'lan-ehitus.svg', 'images/photo.jpg',
                      'images/photo name.jpg', 'fonts/font.woff2', 'service-example.jpg',
-                     'preview-room.jpg', 'website/server.py', 'NOTES.md',
+                     'preview-room.jpg', 'robots.txt', 'sitemap.xml',
+                     'website/server.py', 'NOTES.md',
                      'website/.mail-config.json', 'images/.hidden'):
             target = cls.root / name
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -54,7 +55,8 @@ class PreviewPathTests(unittest.TestCase):
         for path in ('/', '/ru/', '/ru/index.html', '/website.js?v=1', '/website.i18n.js',
                      '/website.css', '/lan-ehitus.svg', '/images/photo.jpg',
                      '/images/photo%20name.jpg', '/fonts/font.woff2',
-                     '/service-example.jpg', '/preview-room.jpg'):
+                     '/service-example.jpg', '/preview-room.jpg',
+                     '/robots.txt', '/sitemap.xml'):
             with self.subTest(path=path):
                 self.assertEqual(self.get(path)[0], 200)
 

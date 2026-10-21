@@ -12,7 +12,24 @@ Bilingual single-page static website for LAN OÜ, Tallinn. Estonian is the defau
 - `website.js`: mobile menu, section navigation, animated galleries, language-position restoration, service preselection, and SMTP enquiry submission.
 - `lan-ehitus.svg`: existing approved-for-now logo; independent from page content.
 
-Run `python3 -B website/build.py` from the source folder after editing content or translations. This regenerates `index.html` (ET), `ru/index.html` (RU), the runtime message bundle and eleven legacy redirects. Add the Estonian translation when changing Russian source copy: the build fails on untranslated content. Runtime UI strings use `t(...)` with entries in the runtime catalog. Service, timing and contact-method values remain the existing Russian backend enums while displayed labels are translated. Cookie dismissal is shared across both routes. Older prototype HTML/CSS files are preserved and are not linked from the active website.
+Run `python3 -B website/build.py` from the source folder after editing content or translations. This regenerates `index.html` (ET), `ru/index.html` (RU), the runtime message bundle, crawler files and thirteen legacy redirects. Add the Estonian translation when changing Russian source copy: the build fails on untranslated content. Runtime UI strings use `t(...)` with entries in the runtime catalog. Service, timing and contact-method values remain the existing Russian backend enums while displayed labels are translated. Cookie dismissal is shared across both routes. Older prototype HTML/CSS files are preserved and are not linked from the active website.
+
+## Image performance
+
+Gallery previews, the logo and the portrait use responsive WebP files under `images/optimized/`. The checked-in `website/image-assets.json` maps originals to their generated sizes. Preview filenames contain a hash of the encoded bytes. Original photos stay available for the fullscreen viewer and are requested when it opens.
+
+After adding or changing a photo, regenerate previews before building the pages:
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r website/requirements-build.txt
+.venv/bin/python website/optimize_images.py
+python3 -B website/build.py
+```
+
+Use `.venv/bin/python website/optimize_images.py --check` to verify that previews and the manifest match their sources. Ordinary content builds use the checked-in files and do not need Pillow. Image generation preserves source files, corrects EXIF orientation and avoids upscaling. Old hashed previews are retained so cached pages continue to work.
+
+Only the first carousel image is eager and high priority. Other active images and detail-strip thumbnails use native lazy loading. Inactive carousel images have deferred source attributes; JavaScript loads the requested slide and the next preview for a visible carousel. Navigation keeps the current image visible until its replacement is decoded. Image errors remain retryable, and fullscreen navigation uses the original photos.
 
 ## Current contact flow
 
@@ -24,7 +41,33 @@ No enquiries, attachments or credentials are logged, and uploaded files are held
 
 ## Content
 
-Service area: Tallinn, Estonia. Do not invent reviews, completed projects, prices, qualifications or guarantees. Existing photos illustrate services; they are not a portfolio. Estonian and Russian versions are available. Real project content is still pending.
+Service area: Tallinn and Harjumaa, Estonia. Do not invent reviews, completed projects, prices, qualifications or guarantees. Existing photos illustrate services; they are not a portfolio. Estonian and Russian versions are available. Real project content is still pending.
+
+## Local search in Estonia
+
+The two indexable content pages are Estonian `/` and Russian `/ru/`. Their titles, descriptions and H1 identify the actual construction/finishing services and Tallinn/Harjumaa coverage. `website/seo.py` adds reciprocal `et-EE`/`ru-EE` language alternatives, Estonian `x-default`, self-canonical URLs and localized social previews. The real language links remain accessible without automatic language redirects.
+
+JSON-LD describes LAN OÜ / LAN Ehitus and the five services, using the confirmed registry code, logo and service area. It uses `Organization` and `Service`, without claiming a public street address, opening hours, reviews or a Google Business Profile. Google LocalBusiness rich-result eligibility is not established. Existing phone/email scraper deterrence is preserved; plain contact details are not added to structured data.
+
+The build regenerates root `robots.txt` and `sitemap.xml`. The sitemap lists only the two canonical content URLs. Older bookmark redirects contain `noindex`; retired `/services/woodwork/` and `/services/renovation/` aliases lead to the current `#services` list. Apache adds `X-Robots-Tag: noindex, follow` to the earlier non-`index.html` design experiments. Keep these pages crawlable so search engines can see the indexing rule. Both crawler files are available in local preview.
+
+Run `python3 -B -m unittest discover -s tests -v` to check metadata, locale relationships, JSON-LD, crawler files and preview access. Rebuild after changing the source copy or SEO metadata. When uploading, include the regenerated language pages, legacy redirects, `website.css`, `website.i18n.js`, `robots.txt`, `sitemap.xml` and the merged `.htaccess`, along with any pending performance assets. SEO deployment does not submit the site to search engines.
+
+The owner confirmed that no Google Business Profile exists yet. The next external steps are to create and verify one accurate service-area profile, enter the real services and coverage, use genuine project photos, and submit the sitemap through verified Search Console access. If customers are not served at the business address, follow Google's instructions to hide that address. Record actual hours and other business details when confirmed; do not infer them from the website.
+
+References: [Google language alternatives](https://developers.google.com/search/docs/specialty/international/localized-versions), [structured business information](https://developers.google.com/search/docs/appearance/structured-data/organization), [service-area profiles](https://support.google.com/business/answer/9157481?hl=en), and [sitemap submission](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap).
+
+## OVH HTTPS redirects
+
+The root `.htaccess` redirects HTTP and `www` requests to `https://lanehitus.ee/` with HTTP 301, preserving paths and query strings. It supports the HTTPS indicators documented for OVH Web Hosting and Cloud Web. Certificate-validation requests under `/.well-known/acme-challenge/` remain accessible without redirects.
+
+Include this hidden file alongside `index.html` in the hosting document root. If the host already has a `.htaccess`, merge these rules before existing application rewrites rather than replacing unrelated settings. OVH must provide a valid certificate for `www.lanehitus.ee` before HTTPS requests to that hostname can reach the redirect. The Python local preview does not use `.htaccess`.
+
+Reference: [OVH HTTPS configuration](https://docs.ovhcloud.com/en/guides/web-cloud/web-hosting/ssl-activate-https-website).
+
+The same `.htaccess` gives static assets a 30-day browser cache, content-hashed WebP previews a one-year immutable cache, and HTML a revalidation policy. This requires Apache `mod_headers`; the rules are skipped when it is unavailable. Change the URL of any updated static asset: bump the CSS/JavaScript query version in `website/build.py`, and use a new filename or version for other assets. The image generator updates preview URLs automatically.
+
+For deployment, upload `images/optimized/` and the matching CSS/JavaScript before the regenerated `index.html` and `ru/index.html`, then merge/upload `.htaccess`. Keep the original photos for the viewer and retain older hashed previews for cached pages. Recheck live response headers after upload because the hosting frontend can affect caching. To roll back, restore the prior HTML, CSS/JavaScript and `.htaccess`; the original photos remain available. The Python preview does not apply Apache cache rules.
 
 ## Validation
 
