@@ -1,5 +1,7 @@
 # Credentials and local configuration
 .mail-config.json
+lanehitus-private/
+.contact-state/
 .env
 .env.*
 !.env.example

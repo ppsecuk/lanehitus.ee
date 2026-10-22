@@ -212,7 +212,20 @@
     "Наверх ↑": "Tagasi üles ↑",
     "Ремонт и отделочные работы в Таллинне и Харьюмаа | LAN Ehitus": "Ehitus- ja viimistlustööd Tallinnas ja Harjumaal | LAN Ehitus",
     "LAN OÜ: террасы, гипсокартон, укладка паркета и ламината, установка дверей и сборка мебели в Таллинне и Харьюмаа. 20 лет опыта. Обсудим вашу задачу.": "LAN OÜ: terrasside ehitus, kipsitööd, parketi ja laminaadi paigaldus, uste paigaldus ning mööbli kokkupanek Tallinnas ja Harjumaal. 20 aastat kogemust.",
-    "Строительные и отделочные работы в Таллинне и Харьюмаа": "Ehitus- ja viimistlustööd Tallinnas ja Harjumaal"
+    "Строительные и отделочные работы в Таллинне и Харьюмаа": "Ehitus- ja viimistlustööd Tallinnas ja Harjumaal",
+    "Повторить проверку": "Korda kontrolli",
+    "Форма защищена Cloudflare Turnstile.": "Vormi kaitseb Cloudflare Turnstile.",
+    "Обработка данных заявки": "Päringu andmete töötlemine",
+    "Что передаётся": "Milliseid andmeid edastatakse",
+    "Форма отправляет имя, предпочтительный способ связи, телефон или email, выбранную услугу, местоположение, сроки, описание задачи и вложения в LAN OÜ. Указывайте только данные, необходимые для обсуждения работ.": "Vorm edastab LAN OÜ-le nime, eelistatud ühenduse võtmise viisi, telefoni või e-posti aadressi, valitud teenuse, asukoha, soovitud tähtaja, töö kirjelduse ja manused. Esitage ainult tööde arutamiseks vajalikud andmed.",
+    "Доставка заявки": "Päringu edastamine",
+    "Сервер сайта передаёт заявку через настроенный почтовый сервис. Сайт не хранит архив обращений. Вложения временно обрабатываются при отправке. Почтовый сервис обрабатывает письмо по своим правилам.": "Veebiserver edastab päringu seadistatud e-posti teenuse kaudu. Veebisait ei säilita päringute arhiivi. Manuseid töödeldakse ajutiselt saatmise käigus. E-posti teenus töötleb kirja oma tingimuste kohaselt.",
+    "Защита от ботов": "Kaitse robotite eest",
+    "Форма использует Cloudflare Turnstile для защиты от автоматических отправок. Cloudflare обрабатывает IP-адрес и технические данные браузера для этой проверки.": "Vorm kasutab automaatsete päringute tõkestamiseks Cloudflare Turnstile’i. Cloudflare töötleb selle kontrolli jaoks IP-aadressi ja brauseri tehnilisi andmeid.",
+    "Обработка данных Turnstile": "Turnstile’i andmetöötlus",
+    "Политика конфиденциальности Cloudflare": "Cloudflare’i privaatsuspõhimõtted",
+    "По вопросам обращения": "Päringuga seotud küsimused",
+    "LAN OÜ, регистрационный код 17505187.": "LAN OÜ, registrikood 17505187."
   },
   "runtime": {
     "Открыть меню": "Ava menüü",
@@ -269,6 +282,10 @@
     "Не удалось подтвердить отправку. Пожалуйста, позвоните нам.": "Saatmist ei õnnestunud kinnitada. Palun helistage meile.",
     "Файлы cookie": "Küpsised",
     "Failed to fetch": "Ühendus ebaõnnestus. Palun proovige uuesti või helistage meile.",
-    "Load failed": "Ühendus ebaõnnestus. Palun proovige uuesti või helistage meile."
+    "Load failed": "Ühendus ebaõnnestus. Palun proovige uuesti või helistage meile.",
+    "Подтвердите, что вы не робот.": "Kinnitage, et te ei ole robot.",
+    "Проверка не пройдена. Повторите проверку и отправку.": "Kontroll ebaõnnestus. Korrake kontrolli ja saatke päring uuesti.",
+    "Проверка временно недоступна. Повторите попытку или позвоните нам.": "Kontroll ei ole ajutiselt saadaval. Proovige uuesti või helistage meile.",
+    "Повторить проверку": "Korda kontrolli"
   }
 }

@@ -108,32 +108,226 @@ if(form){
  form.action='/api/enquiry';
  const sendButton=form.querySelector('[type="submit"]');sendButton.disabled=false;
  let submissionPending=false,tokenPromise=null;
- async function prepareToken(){
-  const response=await fetch('/api/token',{cache:'no-store'});
-  if(!response.ok)throw new Error(t('Отправка временно недоступна. Пожалуйста, позвоните нам.'));
-  const data=await response.json();return data;
+ const unavailableMessage='Отправка временно недоступна. Пожалуйста, позвоните нам.';
+ const captchaMessages={required:'Подтвердите, что вы не робот.',failed:'Проверка не пройдена. Повторите проверку и отправку.',unavailable:'Проверка временно недоступна. Повторите попытку или позвоните нам.'};
+ const acceptedErrors=new Set([
+  'Не найдено.','Обновите страницу и повторите отправку.','Максимум 10 МБ вложений.',
+  'Некорректная форма.','Не удалось загрузить файлы полностью.','Допустимы изображения и PDF.',
+  'Слишком длинное поле.','Обновите страницу и попробуйте ещё раз.',
+  'Слишком много попыток. Попробуйте через 10 минут.','Максимум 5 файлов и 10 МБ суммарно.',
+  'Выберите услугу, местоположение и сроки.','Проверьте описание и имя.',
+  'Укажите корректный email.','Укажите корректный телефон.','Выберите способ связи.',
+  'Повторите отправку чуть позже.','Проверьте поля и файлы. Максимум 5 файлов, 10 МБ суммарно.',
+  'Не удалось подтвердить отправку. Пожалуйста, позвоните нам.',unavailableMessage,...Object.values(captchaMessages),
+ ]);
+ class ContactError extends Error{constructor(message){super(t(message));}}
+ function abortError(){const error=new Error();error.name='AbortError';return error;}
+ function withAbort(promise,signal){
+  if(signal.aborted)return Promise.reject(abortError());
+  return new Promise((resolve,reject)=>{
+   const finish=(callback,value)=>{signal.removeEventListener('abort',abort);callback(value);};
+   const abort=()=>finish(reject,abortError());
+   signal.addEventListener('abort',abort,{once:true});
+   Promise.resolve(promise).then(value=>finish(resolve,value),error=>finish(reject,error));
+  });
  }
- function loadToken(){tokenPromise=prepareToken().catch(()=>null);}
+ function wait(ms,signal){
+  if(signal.aborted)return Promise.reject(abortError());
+  return new Promise((resolve,reject)=>{
+   const abort=()=>{clearTimeout(timer);reject(abortError());};
+   const timer=setTimeout(()=>{signal.removeEventListener('abort',abort);resolve();},ms);
+   signal.addEventListener('abort',abort,{once:true});
+  });
+ }
+ const captchaBox=document.querySelector('#contact-captcha'),captchaHost=document.querySelector('#contact-captcha-widget');
+ const captchaStatus=document.querySelector('#captcha-status'),captchaRetry=document.querySelector('#captcha-retry');
+ const captcha={required:false,config:null,widget:null,size:'',generation:0,token:'',tokenAt:0,error:'',pending:null,scriptPromise:null};
+ const captchaWaiters=new Set();
+ let postPending=false;
+ function captchaNotice(message,state='info',retry=false){
+  if(captchaStatus)showFormFeedback(captchaStatus,message,state);
+  if(captchaRetry)captchaRetry.hidden=!retry;
+ }
+ function validCaptchaToken(){
+  // Reserve time for a mobile upload before the provider's five-minute expiry.
+  return captcha.token&&Date.now()-captcha.tokenAt<200000?captcha.token:'';
+ }
+ function notifyCaptcha(){
+  for(const listener of [...captchaWaiters])listener();
+ }
+ function captchaFailure(message){
+  captcha.token='';captcha.tokenAt=0;captcha.error=message;
+  if(!postPending)captchaNotice(message,'error',true);
+  notifyCaptcha();
+ }
+ function loadTurnstile(){
+  if(window.turnstile?.render)return Promise.resolve(window.turnstile);
+  if(captcha.scriptPromise)return captcha.scriptPromise;
+  captcha.scriptPromise=new Promise((resolve,reject)=>{
+   const script=document.createElement('script');
+   script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';script.async=true;script.defer=true;
+   let finished=false;
+   const finish=(error)=>{
+    if(finished)return;finished=true;clearTimeout(timeout);
+    script.removeEventListener('load',loaded);script.removeEventListener('error',failed);
+    if(error){script.remove();captcha.scriptPromise=null;reject(new ContactError(captchaMessages.unavailable));}
+    else resolve(window.turnstile);
+   };
+   const loaded=()=>{
+    if(!window.turnstile?.render){finish(true);return;}
+    if(typeof window.turnstile.ready==='function')window.turnstile.ready(()=>finish(false));else finish(false);
+   };
+   const failed=()=>finish(true);
+   const timeout=setTimeout(()=>finish(true),10000);
+   script.addEventListener('load',loaded);script.addEventListener('error',failed);
+   document.head.append(script);
+  });
+  return captcha.scriptPromise;
+ }
+ function captchaSize(){return captchaHost?.clientWidth>0&&captchaHost.clientWidth<300?'compact':'flexible';}
+ function removeCaptchaWidget(){
+  const widget=captcha.widget;captcha.generation++;captcha.widget=null;captcha.pending=null;captcha.token='';captcha.tokenAt=0;captcha.error='';
+  if(widget!==null&&window.turnstile?.remove){try{window.turnstile.remove(widget);}catch{/* A fresh render can recover a removed widget. */}}
+ }
+ function initializeCaptcha(){
+  if(!captcha.required)return Promise.resolve();
+  if(captcha.widget!==null)return Promise.resolve();
+  if(captcha.pending)return captcha.pending;
+  const generation=captcha.generation;
+  const pending=loadTurnstile().then(api=>{
+   if(generation!==captcha.generation)return;
+   if(!captchaHost||!captchaBox||!captcha.config)throw new ContactError(captchaMessages.unavailable);
+   captcha.error='';captchaNotice('');captcha.size=captchaSize();
+   const current=()=>generation===captcha.generation;
+   captcha.widget=api.render(captchaHost,{
+    sitekey:captcha.config.siteKey,action:captcha.config.action,size:captcha.size,theme:'light',language:pageLanguage==='ru'?'ru':'auto',
+    'response-field':false,'refresh-expired':'auto','refresh-timeout':'auto',
+    callback:value=>{
+     if(!current())return;
+     if(typeof value!=='string'||!value||value.length>2048){captchaFailure(captchaMessages.failed);return;}
+     captcha.token=value;captcha.tokenAt=Date.now();captcha.error='';
+     if(!postPending)captchaNotice('');notifyCaptcha();
+    },
+    'expired-callback':()=>{if(current())captchaFailure(captchaMessages.required);},
+    'timeout-callback':()=>{if(current())captchaFailure(captchaMessages.failed);},
+    'error-callback':()=>{if(current())captchaFailure(captchaMessages.unavailable);},
+   });
+   if(captcha.widget===null||captcha.widget===undefined)throw new ContactError(captchaMessages.unavailable);
+  }).catch(()=>{
+   if(generation===captcha.generation){if(captcha.widget===undefined)captcha.widget=null;captchaFailure(captchaMessages.unavailable);}
+   throw new ContactError(captchaMessages.unavailable);
+  }).finally(()=>{if(captcha.pending===pending)captcha.pending=null;});
+  captcha.pending=pending;return pending;
+ }
+ function configureCaptcha(data){
+  // Only the legacy loopback preview may omit this property. PHP always enforces verification.
+  if(!Object.prototype.hasOwnProperty.call(data,'captcha')&&['localhost','127.0.0.1','[::1]'].includes(location.hostname))return;
+  captcha.required=true;if(captchaBox)captchaBox.hidden=false;
+  const config=data.captcha;
+  if(!config||config.provider!=='turnstile'||typeof config.siteKey!=='string'||!config.siteKey.trim()||config.action!=='contact'){
+   captchaFailure(captchaMessages.unavailable);throw new ContactError(captchaMessages.unavailable);
+  }
+  if(!captcha.config||captcha.config.siteKey!==config.siteKey||captcha.config.action!==config.action){
+   removeCaptchaWidget();captcha.config={siteKey:config.siteKey,action:config.action};
+  }
+  initializeCaptcha().catch(()=>{});
+ }
+ function resetCaptcha(){
+  if(!captcha.required)return;
+  captcha.token='';captcha.tokenAt=0;captcha.error='';captchaNotice('');
+  if(captcha.widget!==null&&window.turnstile?.reset){
+   try{window.turnstile.reset(captcha.widget);}catch{captchaFailure(captchaMessages.unavailable);}
+  }else initializeCaptcha().catch(()=>{});
+ }
+ async function readyCaptcha(signal){
+  if(!captcha.required)return '';
+  await withAbort(initializeCaptcha(),signal);
+  if(validCaptchaToken())return validCaptchaToken();
+  if(captcha.token)resetCaptcha();
+  if(captcha.error)throw new ContactError(captcha.error);
+  captchaNotice(captchaMessages.required);
+  return new Promise((resolve,reject)=>{
+   const finish=(callback,value)=>{captchaWaiters.delete(changed);signal.removeEventListener('abort',aborted);callback(value);};
+   const changed=()=>{
+    const value=validCaptchaToken();
+    if(value)finish(resolve,value);else if(captcha.error)finish(reject,new ContactError(captcha.error));
+   };
+   const aborted=()=>finish(reject,abortError());
+   captchaWaiters.add(changed);signal.addEventListener('abort',aborted,{once:true});
+   if(signal.aborted)aborted();else changed();
+  });
+ }
+ if(captchaRetry)captchaRetry.addEventListener('click',async()=>{
+  if(postPending||captchaRetry.disabled)return;
+  captchaRetry.disabled=true;
+  try{if(captcha.widget!==null)resetCaptcha();else await initializeCaptcha();}
+  catch{captchaFailure(captchaMessages.unavailable);}
+  finally{captchaRetry.disabled=false;}
+ });
+ window.addEventListener('resize',()=>{
+  if(postPending||captcha.widget===null||captcha.size===captchaSize())return;
+  removeCaptchaWidget();initializeCaptcha().catch(()=>{});
+ });
+ async function prepareToken(){
+  const controller=new AbortController(),startedAt=Date.now();
+  const timeout=setTimeout(()=>controller.abort(),10000);
+  try{
+   const response=await fetch('/api/token',{cache:'no-store',signal:controller.signal});
+   if(!response.ok)throw new ContactError(unavailableMessage);
+   const data=await response.json();
+   if(!data||data.ready!==true||typeof data.token!=='string'||!data.token)throw new ContactError(unavailableMessage);
+   configureCaptcha(data);
+   const expiresIn=typeof data.expiresIn==='number'&&Number.isFinite(data.expiresIn)&&data.expiresIn>0?Math.min(data.expiresIn,3600):3600;
+   const minDelayMs=typeof data.minDelayMs==='number'&&Number.isFinite(data.minDelayMs)&&data.minDelayMs>=0?Math.min(data.minDelayMs,10000):2000;
+   return {token:data.token,receivedAt:Date.now(),expiresAt:startedAt+expiresIn*1000,minDelayMs};
+  }finally{clearTimeout(timeout);}
+ }
+ function loadToken(){tokenPromise=prepareToken().catch(()=>null);return tokenPromise;}
+ async function readyToken(signal){
+  let session=await withAbort(tokenPromise||loadToken(),signal);
+  if(!session||session.expiresAt<=Date.now()+session.minDelayMs+1000)session=await withAbort(loadToken(),signal);
+  if(!session)throw new ContactError(unavailableMessage);
+  await wait(Math.max(0,session.receivedAt+session.minDelayMs-Date.now()),signal);
+  if(session.expiresAt<=Date.now())throw new ContactError(unavailableMessage);
+  return session;
+ }
+ async function readReply(response){
+  try{return await response.json();}catch(error){if(error.name==='AbortError')throw error;return null;}
+ }
+ function responseError(response,result){
+  if(result&&acceptedErrors.has(result.error))return result.error;
+  if(response.status===413)return 'Максимум 5 файлов и 10 МБ суммарно.';
+  if(response.status===429)return 'Слишком много попыток. Попробуйте через 10 минут.';
+  if(response.status===503)return unavailableMessage;
+  return 'Не удалось подтвердить отправку.';
+ }
  loadToken();
  form.addEventListener('submit',async event=>{
   event.preventDefault();
   if(submissionPending||!validate()||form.elements._honey.value)return;
   submissionPending=true;sendButton.disabled=true;sendButton.textContent=t('Отправляем…');form.setAttribute('aria-busy','true');
   showFormFeedback(status,t('Отправляем заявку…'),'pending');
-  const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
+  const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),90000);
+  let postAttempted=false;
   try{
-   const session=await tokenPromise;
-   if(!session||!session.ready)throw new Error(t('Отправка временно недоступна. Пожалуйста, позвоните нам.'));
+   const session=await readyToken(controller.signal);
+   const captchaResponse=await readyCaptcha(controller.signal);
    const data=new FormData(form);data.append('_token',session.token);
+   if(captcha.required){
+    if(!captchaResponse)throw new ContactError(captchaMessages.required);
+    data.set('cf-turnstile-response',captchaResponse);
+   }
    attachedFiles.forEach((file,index)=>data.append('attachment'+(index+1),file,file.name));
+   postAttempted=true;postPending=true;if(captchaRetry)captchaRetry.disabled=true;
    const response=await fetch('/api/enquiry',{method:'POST',body:data,signal:controller.signal});
-   const result=await response.json();
-   if(!response.ok||!result.ok)throw new Error(result.error||t('Не удалось подтвердить отправку.'));
+   const result=await readReply(response);
+   if(!response.ok||!result||result.ok!==true)throw new ContactError(responseError(response,result));
    showFormFeedback(status,t('Спасибо! Заявка отправлена. Мы свяжемся с вами выбранным способом.'),'success');
    form.reset();attachedFiles=[];renderFiles();fileStatus.textContent='';syncContactMethod();
   }catch(error){
-   showFormFeedback(status,error.name==='AbortError'?t('Не удалось подтвердить отправку вовремя. Данные сохранены в форме. Пожалуйста, позвоните нам.'):error.message,'error');
+   showFormFeedback(status,error.name==='AbortError'?t('Не удалось подтвердить отправку вовремя. Данные сохранены в форме. Пожалуйста, позвоните нам.'):error instanceof ContactError?error.message:t('Не удалось подтвердить отправку.'),'error');
   }finally{
+   postPending=false;if(captchaRetry)captchaRetry.disabled=false;if(postAttempted)resetCaptcha();
    clearTimeout(timeout);submissionPending=false;sendButton.disabled=false;sendButton.textContent=t('Отправить заявку');form.removeAttribute('aria-busy');loadToken();
   }
  });
@@ -354,7 +548,7 @@ if(typeof Element.prototype.animate==='function'){
    const previous=state.animation?position(state):state.strip.scrollLeft;
    const progress=Math.max(0,Math.min(1,previous/limit));
    const previousPhase=reverse?2-progress:progress;
-   state.animation?.cancel();state.limit=limit;state.duration=limit/22*1000;
+   state.animation?.cancel();state.limit=limit;state.duration=limit/33*1000;
    state.strip.classList.add('has-track-motion');state.strip.scrollLeft=0;
    state.animation=state.track.animate([
     {transform:'translate3d(0,0,0)'},{transform:`translate3d(${-limit}px,0,0)`}

@@ -12,6 +12,13 @@ RewriteRule ^ https://lanehitus.ee%{REQUEST_URI} [R=301,L]
 RewriteCond %{HTTP_HOST} ^www\.lanehitus\.ee(?::[0-9]+)?$ [NC]
 RewriteRule ^ https://lanehitus.ee%{REQUEST_URI} [R=301,L]
 
+# Keep repository internals and hidden configuration out of the public site.
+RewriteRule (^|/)\. - [F,L]
+RewriteRule ^(?:website|tests|api/vendor)(?:/|$) - [F,L]
+
+# Preserve the browser contract while running the backend in OVH's PHP runtime.
+RewriteRule ^api/(?:token|enquiry)$ api/index.php [END]
+
 <IfModule mod_mime.c>
     AddType image/webp .webp
 </IfModule>

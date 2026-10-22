@@ -148,7 +148,7 @@ body.gallery-open{overflow:hidden}.photo-gallery :focus-visible{outline-color:wh
 .service-row:hover h3{color:var(--ink)}
 .service-choices{gap:12px}
 .service-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:11px 18px;border:1px solid var(--green);border-radius:5px;font-size:13px;font-weight:650;line-height:1.4;text-decoration:none;position:relative;z-index:2}
-.service-price{background:white;color:var(--green)}
+.service-price{background:white;color:#000;border-color:#000}
 .service-price:hover{background:var(--soft)}
 .service-call{background:var(--green);color:white}
 .service-call:hover{background:var(--dark)}
@@ -340,6 +340,19 @@ body.gallery-open{overflow:hidden}.photo-gallery :focus-visible{outline-color:wh
 #request-form .text-button{font-size:13px;min-height:44px}
 #request-form input,#request-form select,#request-form textarea{font-size:16px}
 #request-form textarea{min-height:140px}
+#contact-captcha{width:100%;min-width:0;margin:20px 0 12px}
+#contact-captcha-widget{width:100%;min-width:0}
+#captcha-status:empty{display:none}
+#captcha-status{margin:10px 0 0;font-size:13px;line-height:1.6;overflow-wrap:anywhere}
+#captcha-status[data-state="error"]{color:#a32121}
+#request-form #captcha-retry{margin:2px 0 0;padding:10px 0;min-height:44px;text-align:left}
+#request-form .captcha-disclosure{margin:12px 0 20px}
+.captcha-disclosure a,.contact-privacy a{color:var(--green)}
+#contact .contact-privacy{margin:0;padding:18px 0;border-top:1px solid var(--line)}
+#contact .contact-privacy summary{font-size:14px;color:var(--green)}
+#contact .contact-privacy .prose{padding:0}
+#contact .contact-privacy h3{font-size:16px;margin:22px 0 8px}
+#contact .contact-privacy p{max-width:760px;font-size:13px;line-height:1.7;margin:8px 0 0;overflow-wrap:anywhere}
 @media(max-width:900px){#contact .contact-layout{gap:32px}#request-form .form-grid{grid-template-columns:1fr;gap:0}}
 @media(max-width:700px){
  #contact .contact-layout{grid-template-columns:1fr;gap:32px}
@@ -686,23 +699,24 @@ body.gallery-open{overflow:hidden}.photo-gallery :focus-visible{outline-color:wh
  .service-copy .service-call{grid-column:1/-1}
 }
 
-/* Static starting prices retain the outlined rectangle beside the actions. */
+/* Starting-price links retain the outlined rectangle beside the actions. */
 .service-rate{
  display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
- min-width:0;min-height:44px;padding:9px 18px;border:1px solid var(--green);border-radius:5px;
- background:#fff;color:var(--green);font-size:13px;font-weight:650;line-height:1.4;white-space:nowrap;cursor:default;
+ min-width:0;min-height:44px;padding:9px 18px;border:1px solid #000;border-radius:5px;
+ background:#fff;color:#000;font-size:13px;font-weight:650;line-height:1.4;white-space:nowrap;cursor:pointer;text-decoration:none;
 }
+.service-choices .service-rate:hover{background:var(--soft);text-decoration:none}
 .service-rate-amount{display:block;line-height:1.35;white-space:nowrap;font-variant-numeric:tabular-nums}
 .service-rate-amount strong{font-size:16px;font-weight:750}
 .service-rate-from,.service-rate-unit{font-size:12px;font-weight:400}
-.service-rate-kind{font-size:11px;font-weight:500;line-height:1.25;color:var(--muted)}
+.service-rate-kind{font-size:11px;font-weight:500;line-height:1.25;color:#000}
 .service-rate--door{gap:1px;padding:2px 12px}
 .service-rate--door .service-rate-amount{line-height:1.2}
 @media(max-width:700px){
  .service-copy .service-choices>.service-button,.service-copy .service-choices>.service-rate{height:46px}
  .service-copy .service-choices>.service-rate{
   display:flex;box-sizing:border-box;width:100%;min-height:46px;padding:8px 10px;
-  border:1px solid var(--green,#087d53);border-radius:5px;background:#fff;color:var(--green,#087d53);font-size:14px;
+  border:1px solid #000;border-radius:5px;background:#fff;color:#000;font-size:14px;
  }
  .service-copy .service-choices .service-rate--door{padding:3px 10px}
  .service-copy .service-choices--doors>.service-price{grid-column:1/-1}
