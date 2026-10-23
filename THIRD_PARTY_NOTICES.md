@@ -35,8 +35,8 @@ THE SOFTWARE.
 
 ## Manrope
 
-`fonts/Manrope.ttf` is distributed under the SIL Open Font License, Version 1.1.
+`images/fonts/Manrope.ttf` is distributed under the SIL Open Font License, Version 1.1.
 
 Copyright 2018 The Manrope Project Authors (https://github.com/googlefonts/manrope)
 
-The complete copyright and license notice is preserved in [fonts/OFL.txt](fonts/OFL.txt).
+The complete copyright and license notice is preserved in [images/fonts/OFL.txt](images/fonts/OFL.txt).
