@@ -98,3 +98,5 @@ Validated unique IDs, one H1, every fragment destination, removal of separate-pa
 ## Responsive design preference
 
 Apply layout adjustments to both desktop and mobile by default. Keep the service photo/text split consistent across breakpoints unless explicitly requested otherwise. Current split: 48/52 of available column space.
+
+Keep one shared format for service buttons and price links: 44 px high on desktop and 46 px on mobile. Use compact spacing and wrap complete controls when needed; do not add taller variants for individual services.

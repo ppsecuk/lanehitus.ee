@@ -146,8 +146,8 @@ body.gallery-open{overflow:hidden}.photo-gallery :focus-visible{outline-color:wh
 .service-row{cursor:default}
 .service-row::before{display:none}
 .service-row:hover h3{color:var(--ink)}
-.service-choices{gap:12px}
-.service-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:11px 18px;border:1px solid var(--green);border-radius:5px;font-size:13px;font-weight:650;line-height:1.4;text-decoration:none;position:relative;z-index:2}
+.service-choices{gap:6px}
+.service-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:4px 5px;border:1px solid var(--green);border-radius:5px;font-size:13px;font-weight:650;line-height:1.4;text-decoration:none;position:relative;z-index:2}
 .service-price{background:white;color:#000;border-color:#000}
 .service-price:hover{background:var(--soft)}
 .service-call{background:var(--green);color:white}
@@ -479,6 +479,7 @@ body.gallery-open{overflow:hidden}.photo-gallery :focus-visible{outline-color:wh
 .price-table tbody th{width:64%}
 .price-table tbody td:nth-child(2){width:36%}
 .price-unit{font-size:15px;font-weight:400;color:var(--muted);white-space:nowrap}
+.price-tax{font-size:11px;font-weight:400;white-space:nowrap}
 @media(max-width:700px){
  .price-table tbody tr{grid-template-columns:minmax(0,1fr) auto;align-items:center}
  .price-table tbody td:nth-child(2){width:auto;grid-column:2;grid-row:1;text-align:right;white-space:normal}
@@ -683,8 +684,13 @@ body.gallery-open{overflow:hidden}.photo-gallery :focus-visible{outline-color:wh
 .service-highlights li{display:grid;grid-template-columns:20px minmax(0,1fr);align-items:start;gap:10px;color:var(--ink);font-size:16px;line-height:1.5}
 .service-highlights svg{display:block;width:20px;height:20px;margin-top:2px;fill:none;stroke:var(--green);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .service-copy .service-action{margin-top:24px}
-.service-copy .service-choices{align-items:stretch}
+.service-copy .service-choices{align-items:center}
 .service-copy .service-choices>.service-button,.service-copy .service-choices>.service-rate{box-sizing:border-box;height:44px}
+@media(min-width:701px){
+ .service-copy .service-choices>.service-button,
+ .service-copy .service-choices>.service-rate{flex-shrink:0}
+ .service-call-label{display:block;max-width:100px;white-space:normal;text-align:center;line-height:1.2}
+}
 @media(min-width:701px) and (max-width:960px){
  .service-highlights li{font-size:15px}
 }
@@ -702,24 +708,29 @@ body.gallery-open{overflow:hidden}.photo-gallery :focus-visible{outline-color:wh
 /* Starting-price links retain the outlined rectangle beside the actions. */
 .service-rate{
  display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
- min-width:0;min-height:44px;padding:9px 18px;border:1px solid #000;border-radius:5px;
+ min-width:0;min-height:44px;padding:2px 5px;border:1px solid #000;border-radius:5px;
  background:#fff;color:#000;font-size:13px;font-weight:650;line-height:1.4;white-space:nowrap;cursor:pointer;text-decoration:none;
 }
 .service-choices .service-rate:hover{background:var(--soft);text-decoration:none}
 .service-rate-amount{display:block;line-height:1.35;white-space:nowrap;font-variant-numeric:tabular-nums}
+.service-rate-value{white-space:nowrap}
 .service-rate-amount strong{font-size:16px;font-weight:750}
-.service-rate-from,.service-rate-unit{font-size:12px;font-weight:400}
+.service-copy .service-choices .service-price,.service-rate-from,.service-rate-unit,.service-rate .price-tax{font-size:12px;font-weight:400}
 .service-rate-kind{font-size:11px;font-weight:500;line-height:1.25;color:#000}
-.service-rate--door{gap:1px;padding:2px 12px}
+.service-rate--door{gap:1px}
 .service-rate--door .service-rate-amount{line-height:1.2}
 @media(max-width:700px){
  .service-copy .service-choices>.service-button,.service-copy .service-choices>.service-rate{height:46px}
  .service-copy .service-choices>.service-rate{
-  display:flex;box-sizing:border-box;width:100%;min-height:46px;padding:8px 10px;
+  display:flex;box-sizing:border-box;width:100%;min-height:46px;padding:3px 8px;
   border:1px solid #000;border-radius:5px;background:#fff;color:#000;font-size:14px;
  }
- .service-copy .service-choices .service-rate--door{padding:3px 10px}
  .service-copy .service-choices--doors>.service-price{grid-column:1/-1}
+}
+
+/* Stack complete controls on narrow phones while retaining the shared height. */
+@media(max-width:390px){
+ .service-copy .service-choices{grid-template-columns:minmax(0,1fr)}
 }
 
 /* Emphasize the parquet in the main flooring preview. */
