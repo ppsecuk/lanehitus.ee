@@ -31,6 +31,8 @@ Check PHP 8.3 or newer, the `openssl`, `fileinfo` and `json` extensions, `allow_
 
 ## Configure mail privately
 
+For the exact Gmail-account setup and troubleshooting checklist, follow [GMAIL-SETUP.md](GMAIL-SETUP.md). The helper now defaults both the sending and receiving mailbox to `lebjodkin.toll68@gmail.com`; press Enter to accept that sender.
+
 Place the mail configuration at FTP `/lanehitus-private/.mail-config.json`. You can reuse the ignored local `website/.mail-config.json` created by `website/configure-mail.py` after adding the required Turnstile keys below; transfer it privately without printing it, committing it or putting it under `/lanehitus`.
 
 Run `python3 website/configure-mail.py` from the local repository and enter the sending Gmail address, App Password and Turnstile keys when prompted. The helper fixes the recipient to `lebjodkin.toll68@gmail.com`; inspect its source if a different recipient is intended, rather than adding customer-controlled routing. The helper saves configuration only and does not test or send mail. Re-running it replaces the local configuration, so have all required values available privately first.

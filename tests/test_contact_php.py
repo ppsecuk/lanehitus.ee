@@ -201,6 +201,61 @@ class ContactPHPTests(unittest.TestCase):
         self.assertFalse(json.loads(body)['ready'])
         self.assertNotIn(b'test-only', body)
 
+    def test_private_configuration_diagnostic_has_no_delivery_or_disclosure(self):
+        def diagnostic():
+            return self.docker('exec', '--user', 'www-data', self.name, 'php',
+                               '/var/www/html/api/index.php', '--check-config', check=False)
+
+        result = diagnostic()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('SMTP and Turnstile connectivity not tested.', result.stdout)
+        self.assertFalse(self.messages())
+        self.assertFalse(self.captcha_requests())
+        for value in (self.config['password'], self.config['turnstile_secret_key'],
+                      self.config['user'], self.config['recipient']):
+            self.assertNotIn(value, result.stdout + result.stderr)
+
+        for change, category in (
+                ('file_put_contents("/var/www/lanehitus-private/.mail-config.json", "{}");',
+                 'configuration_fields_missing'),
+                ('file_put_contents("/var/www/lanehitus-private/.mail-config.json", "invalid-json");',
+                 'configuration_json_invalid'),
+                ('unlink("/var/www/lanehitus-private/.mail-config.json");',
+                 'configuration_file_unavailable')):
+            with self.subTest(category=category):
+                self.php_fixture(change)
+                result = diagnostic()
+                self.assertEqual(result.returncode, 1)
+                self.assertEqual(result.stderr.strip(), 'Contact configuration unavailable: ' + category)
+                self.assertEqual(result.stdout, '')
+                status, _, body = self.request('GET', '/api/token')
+                self.assertEqual(status, 200)
+                self.assertEqual(json.loads(body), {'ready': False, 'token': ''})
+                self.assertNotIn(category.encode(), body)
+
+    def test_private_diagnostic_rejects_unwritable_state_without_modifying_it(self):
+        # A read-only container filesystem gives a deterministic permission failure;
+        # chmod on a Docker Desktop bind mount may still allow writes from the VM.
+        self.php_fixture('''
+            $path = "/var/www/lanehitus-private/.contact-state";
+            rename($path, $path . "-saved");
+            symlink("/sys", $path);
+        ''')
+        try:
+            result = self.docker('exec', '--user', 'www-data', self.name, 'php',
+                                 '/var/www/html/api/index.php', '--check-config', check=False)
+            self.assertEqual(result.returncode, 1)
+            self.assertEqual(result.stderr.strip(),
+                             'Contact configuration unavailable: private_state_not_writable')
+            self.assertFalse(self.messages())
+            self.assertFalse(self.captcha_requests())
+        finally:
+            self.php_fixture('''
+                $path = "/var/www/lanehitus-private/.contact-state";
+                unlink($path);
+                rename($path . "-saved", $path);
+            ''')
+
     def test_missing_captcha_keys_is_not_ready(self):
         for key in ('turnstile_site_key', 'turnstile_secret_key'):
             with self.subTest(key=key):

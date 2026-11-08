@@ -23,28 +23,37 @@ function respond(int $status, array $body): never
     exit;
 }
 
-function mailSettings(): ?array
+function mailSettings(?string &$problem = null): ?array
 {
+    // Only fixed categories may reach diagnostics; never include configuration values.
+    $problem = 'configuration_file_unavailable';
     $path = PRIVATE_DIR . '/.mail-config.json';
-    if (!is_file($path) || !is_readable($path) || filesize($path) > 16384
-        || !extension_loaded('openssl') || !extension_loaded('fileinfo')
+    if (!is_file($path) || !is_readable($path) || filesize($path) > 16384) {
+        return null;
+    }
+    $problem = 'php_runtime_unavailable';
+    if (!extension_loaded('openssl') || !extension_loaded('fileinfo')
         || !filter_var(ini_get('allow_url_fopen'), FILTER_VALIDATE_BOOL)) {
         return null;
     }
+    $problem = 'mailer_files_unavailable';
     foreach (['Exception', 'PHPMailer', 'SMTP'] as $source) {
         if (!is_readable(__DIR__ . '/vendor/phpmailer/src/' . $source . '.php')) {
             return null;
         }
     }
+    $problem = 'configuration_json_invalid';
     $value = json_decode((string) file_get_contents($path), true);
     if (!is_array($value)) {
         return null;
     }
+    $problem = 'configuration_fields_missing';
     foreach (['host', 'user', 'password', 'sender', 'recipient', 'turnstile_site_key', 'turnstile_secret_key'] as $key) {
         if (!isset($value[$key]) || !is_string($value[$key]) || $value[$key] === '') {
             return null;
         }
     }
+    $problem = 'turnstile_keys_invalid';
     foreach (['turnstile_site_key', 'turnstile_secret_key'] as $key) {
         if (!preg_match('/^[A-Za-z0-9_-]{10,100}$/D', $value[$key])
             || preg_match('/^[123]x0{20,}/', $value[$key])) {
@@ -52,6 +61,7 @@ function mailSettings(): ?array
             return null;
         }
     }
+    $problem = 'smtp_identity_invalid';
     if (!filter_var($value['host'], FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)
         || strlen($value['host']) > 253 || preg_match('/[\r\n\x00]/', $value['user'])
         || !filter_var($value['user'], FILTER_VALIDATE_EMAIL)
@@ -60,14 +70,17 @@ function mailSettings(): ?array
         || strcasecmp($value['sender'], $value['user']) !== 0) {
         return null;
     }
+    $problem = 'smtp_port_invalid';
     $port = $value['port'] ?? 465;
     if (!in_array($port, [465, 587, '465', '587'], true)) {
         return null;
     }
     $value['port'] = (int) $port;
+    $problem = 'tls_ca_file_unavailable';
     if (isset($value['ca_file']) && (!is_string($value['ca_file']) || !is_readable($value['ca_file']))) {
         return null;
     }
+    $problem = null;
     return $value;
 }
 
@@ -369,6 +382,22 @@ function verifyHuman(array $settings): void
     }
 }
 
+// Human-run hosting diagnostic. No network, messages, state writes or public details.
+if (PHP_SAPI === 'cli' && ($argv[1] ?? '') === '--check-config') {
+    if (mailSettings($problem) === null) {
+        fwrite(STDERR, 'Contact configuration unavailable: ' . $problem . PHP_EOL);
+        exit(1);
+    }
+    $directory = PRIVATE_DIR . '/.contact-state';
+    $target = is_dir($directory) ? $directory : PRIVATE_DIR;
+    if (!is_writable($target)) {
+        fwrite(STDERR, 'Contact configuration unavailable: private_state_not_writable' . PHP_EOL);
+        exit(1);
+    }
+    fwrite(STDOUT, 'Contact configuration OK. SMTP and Turnstile connectivity not tested.' . PHP_EOL);
+    exit(0);
+}
+
 try {
     $path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
     if (!in_array($path, ['/api/token', '/api/enquiry'], true)) {
@@ -379,7 +408,10 @@ try {
         header('Allow: ' . ($path === '/api/token' ? 'GET' : 'POST'));
         respond(405, ['error' => RETRY]);
     }
-    $settings = mailSettings();
+    $settings = mailSettings($problem);
+    if ($settings === null) {
+        error_log('LAN contact unavailable: ' . $problem);
+    }
     if ($path === '/api/token') {
         if ($settings === null) {
             respond(200, ['ready' => false, 'token' => '']);
